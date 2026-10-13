@@ -19,7 +19,7 @@
     }
   </style>
 </head>
-<body class="bg-[#FFFDF5] min-h-screen text-slate-800 font-sans p-4 sm:p-6 pb-28">
+<body class="bg-[#FFFDF5] min-h-screen text-slate-800 font-sans p-4 sm:p-6 pb-36">
 
   <!-- Header -->
   <div class="max-w-md mx-auto text-center mb-5">
@@ -102,7 +102,7 @@
         </div>
         <div>
           <h3 id="goalTitleDisplay" class="font-bold text-slate-800 text-sm sm:text-base">Space Lego Set</h3>
-          <p class="text-xs text-slate-500">Saved: <span id="currentSave" class="font-bold text-blue-600">0</span> / <span id="currentGoalMax">20</span> ⭐ (<span id="goalDollarsText">$4.00</span>)</p>
+          <p class="text-xs text-slate-500">Saved: <span id="currentSave" class="font-bold text-blue-600">0</span> / <span id="currentGoalMax">20</span> ⭐ (<span id="goalDollarsText">$20.00</span>)</p>
         </div>
       </div>
 
@@ -127,7 +127,7 @@
       </div>
     </div>
 
-    <!-- MAIN HOUSEWORK (TRẢ TIỀN MẶT: TẤT CẢ $1 VÀ 1 SAO) -->
+    <!-- MAIN HOUSEWORK (CÔNG VIỆC TRẢ TIỀN MẶT $1 & 1⭐) -->
     <div class="bg-white rounded-3xl p-5 border border-slate-200 shadow-sm space-y-3">
       <div class="flex items-center justify-between border-b pb-2">
         <h3 class="font-bold text-slate-800 text-sm flex items-center gap-2">
@@ -137,7 +137,6 @@
       </div>
 
       <div class="space-y-2">
-        <!-- Quét nhà -->
         <div class="flex items-center justify-between p-2.5 bg-slate-50 rounded-xl hover:bg-slate-100 transition">
           <div class="flex items-center gap-2.5">
             <span class="text-lg">🧹</span>
@@ -151,7 +150,6 @@
           </button>
         </div>
 
-        <!-- Lau nhà -->
         <div class="flex items-center justify-between p-2.5 bg-slate-50 rounded-xl hover:bg-slate-100 transition">
           <div class="flex items-center gap-2.5">
             <span class="text-lg">🪣</span>
@@ -165,7 +163,6 @@
           </button>
         </div>
 
-        <!-- Gãi lưng cho ba -->
         <div class="flex items-center justify-between p-2.5 bg-slate-50 rounded-xl hover:bg-slate-100 transition">
           <div class="flex items-center gap-2.5">
             <span class="text-lg">🙌</span>
@@ -179,7 +176,6 @@
           </button>
         </div>
 
-        <!-- Đấm lưng cho ba mẹ -->
         <div class="flex items-center justify-between p-2.5 bg-slate-50 rounded-xl hover:bg-slate-100 transition">
           <div class="flex items-center gap-2.5">
             <span class="text-lg">💆‍♂️</span>
@@ -276,6 +272,29 @@
         </div>
         <button onclick="sendCustomTip()" class="w-1/2 bg-amber-500 hover:bg-amber-600 active:scale-95 text-white text-xs font-bold py-2 rounded-xl transition flex items-center justify-center gap-1 shadow-sm">
           <i class="fa-solid fa-coins"></i> Send Tip ($)
+        </button>
+      </div>
+    </div>
+
+    <!-- KHU VỰC SỬA SAI / TRỪ LẠI KHI BẤM CỘNG NHẦM (MỚI) -->
+    <div class="bg-white rounded-3xl p-5 border border-rose-200 shadow-sm space-y-3">
+      <div class="flex items-center justify-between border-b pb-2">
+        <label class="text-xs font-bold text-rose-800 flex items-center gap-1.5">
+          <i class="fa-solid fa-rotate-left text-rose-500"></i> Correct / Minus Mistake
+        </label>
+        <span class="text-[10px] bg-rose-100 text-rose-700 font-bold px-2 py-0.5 rounded-full">
+          Fix Added Mistake
+        </span>
+      </div>
+      <p class="text-[11px] text-slate-500">
+        Did you accidentally tap too many times? Enter amount ($ / ⭐) to deduct from Save jar and fix stats:
+      </p>
+      <div class="flex gap-2 items-center">
+        <div class="relative w-2/3">
+          <input id="mistakeAmountInput" type="number" min="1" step="1" placeholder="Amount ($ or ⭐)" class="w-full bg-rose-50/50 border border-rose-200 rounded-xl px-3 py-2 text-xs font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-rose-400">
+        </div>
+        <button onclick="minusMistake()" class="w-1/3 bg-rose-500 hover:bg-rose-600 active:scale-95 text-white text-xs font-bold py-2 rounded-xl transition flex items-center justify-center gap-1 shadow-sm">
+          <i class="fa-solid fa-minus"></i> Correct
         </button>
       </div>
     </div>
@@ -481,7 +500,7 @@
       document.getElementById("goalEditForm").classList.add("hidden");
     };
 
-    // Duyệt thưởng: 1 việc = 1 sao (chia vào hũ và cộng vào tổng thu nhập)
+    // Duyệt thưởng việc làm (+1⭐ & +$1)
     window.rewardKid = async function(stars, taskName) {
       await updateDoc(walletRef, {
         save: increment(stars),
@@ -490,7 +509,7 @@
       });
     };
 
-    // TIP TIỀN MẶT (1$ = 1⭐)
+    // Tip tiền mặt
     window.quickTip = async function(dollars) {
       if (confirm(`Tip $${dollars.toFixed(2)} to Chau? (+${dollars} Stars)`)) {
         await updateDoc(walletRef, {
@@ -520,7 +539,33 @@
       }
     };
 
-    // RÚT TIỀN ĐÔ (1$ = 1⭐)
+    // Ô TRỪ BỚT SỬA SAI KHI LỠ CỘNG NHẦM
+    window.minusMistake = async function() {
+      const inputEl = document.getElementById("mistakeAmountInput");
+      const amount = parseInt(inputEl.value);
+
+      if (isNaN(amount) || amount <= 0) {
+        alert("Please enter a valid amount to correct!");
+        return;
+      }
+
+      const currentSave = parseInt(document.getElementById("saveCoins").innerText);
+      if (currentSave < amount) {
+        alert(`Cannot deduct more than current Save jar balance (${currentSave})!`);
+        return;
+      }
+
+      if (confirm(`Deduct ${amount} ($ or ⭐) to fix accidental addition? (Will also correct Monthly & Yearly stats)`)) {
+        await updateDoc(walletRef, {
+          save: increment(-amount),
+          earnedThisMonth: increment(-amount),
+          earnedThisYear: increment(-amount)
+        });
+        inputEl.value = "";
+      }
+    };
+
+    // Rút tiền đô
     window.updateDollarToStarPreview = function() {
       const dollars = parseFloat(document.getElementById("withdrawDollarInput").value);
       if (!isNaN(dollars) && dollars > 0) {
@@ -554,7 +599,7 @@
       }
     };
 
-    // ĐỔI SAO RA ĐÔ (1⭐ = 1$)
+    // Đổi sao ra tiền mặt
     window.updateStarToDollarPreview = function() {
       const stars = parseFloat(document.getElementById("exchangeStarInput").value);
       if (!isNaN(stars) && stars > 0) {
