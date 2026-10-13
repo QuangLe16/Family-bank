@@ -19,7 +19,7 @@
     }
   </style>
 </head>
-<body class="bg-[#FFFDF5] min-h-screen text-slate-800 font-sans p-4 sm:p-6 pb-24">
+<body class="bg-[#FFFDF5] min-h-screen text-slate-800 font-sans p-4 sm:p-6 pb-28">
 
   <!-- Header -->
   <div class="max-w-md mx-auto text-center mb-5">
@@ -127,61 +127,483 @@
       </div>
     </div>
 
-    <!-- MAIN HOUSEWORK -->
+    <!-- MAIN HOUSEWORK (TRẢ TIỀN MẶT: TẤT CẢ $1 VÀ 1 SAO) -->
     <div class="bg-white rounded-3xl p-5 border border-slate-200 shadow-sm space-y-3">
       <div class="flex items-center justify-between border-b pb-2">
         <h3 class="font-bold text-slate-800 text-sm flex items-center gap-2">
           <i class="fa-solid fa-broom text-amber-500"></i> Housework
         </h3>
-        <span class="text-[10px] bg-amber-100 text-amber-800 px-2.5 py-0.5 rounded-full font-bold uppercase tracking-wider">Main Tasks</span>
+        <span class="text-[10px] bg-emerald-100 text-emerald-800 px-2.5 py-0.5 rounded-full font-bold uppercase tracking-wider">Cash Tasks ($1 & 1⭐)</span>
       </div>
 
       <div class="space-y-2">
+        <!-- Quét nhà -->
         <div class="flex items-center justify-between p-2.5 bg-slate-50 rounded-xl hover:bg-slate-100 transition">
           <div class="flex items-center gap-2.5">
             <span class="text-lg">🧹</span>
             <div>
               <p class="text-xs font-bold text-slate-800">Sweep the floor</p>
-              <p class="text-[10px] text-emerald-600 font-semibold">+2 Stars</p>
+              <p class="text-[10px] text-emerald-600 font-semibold">+$1.00 & +1 Star</p>
             </div>
           </div>
-          <button onclick="rewardKid(2, 'Sweep floor')" class="bg-emerald-500 active:scale-95 hover:bg-emerald-600 text-white text-xs font-bold px-3 py-1.5 rounded-lg shadow-sm transition">Approve (+2)</button>
+          <button onclick="rewardKid(1, 'Sweep floor')" class="bg-emerald-500 active:scale-95 hover:bg-emerald-600 text-white text-xs font-bold px-3 py-1.5 rounded-lg shadow-sm transition">
+            Approve ($1)
+          </button>
         </div>
 
+        <!-- Lau nhà -->
         <div class="flex items-center justify-between p-2.5 bg-slate-50 rounded-xl hover:bg-slate-100 transition">
           <div class="flex items-center gap-2.5">
             <span class="text-lg">🪣</span>
             <div>
               <p class="text-xs font-bold text-slate-800">Mop the floor</p>
-              <p class="text-[10px] text-emerald-600 font-semibold">+2 Stars</p>
+              <p class="text-[10px] text-emerald-600 font-semibold">+$1.00 & +1 Star</p>
             </div>
           </div>
-          <button onclick="rewardKid(2, 'Mop floor')" class="bg-emerald-500 active:scale-95 hover:bg-emerald-600 text-white text-xs font-bold px-3 py-1.5 rounded-lg shadow-sm transition">Approve (+2)</button>
+          <button onclick="rewardKid(1, 'Mop floor')" class="bg-emerald-500 active:scale-95 hover:bg-emerald-600 text-white text-xs font-bold px-3 py-1.5 rounded-lg shadow-sm transition">
+            Approve ($1)
+          </button>
         </div>
 
+        <!-- Gãi lưng cho ba -->
         <div class="flex items-center justify-between p-2.5 bg-slate-50 rounded-xl hover:bg-slate-100 transition">
           <div class="flex items-center gap-2.5">
             <span class="text-lg">🙌</span>
             <div>
               <p class="text-xs font-bold text-slate-800">Scratch dad's back</p>
-              <p class="text-[10px] text-emerald-600 font-semibold">+1 Star</p>
+              <p class="text-[10px] text-emerald-600 font-semibold">+$1.00 & +1 Star</p>
             </div>
           </div>
-          <button onclick="rewardKid(1, 'Scratch dad back')" class="bg-emerald-500 active:scale-95 hover:bg-emerald-600 text-white text-xs font-bold px-3 py-1.5 rounded-lg shadow-sm transition">Approve (+1)</button>
+          <button onclick="rewardKid(1, 'Scratch dad back')" class="bg-emerald-500 active:scale-95 hover:bg-emerald-600 text-white text-xs font-bold px-3 py-1.5 rounded-lg shadow-sm transition">
+            Approve ($1)
+          </button>
         </div>
 
+        <!-- Đấm lưng cho ba mẹ -->
         <div class="flex items-center justify-between p-2.5 bg-slate-50 rounded-xl hover:bg-slate-100 transition">
           <div class="flex items-center gap-2.5">
             <span class="text-lg">💆‍♂️</span>
             <div>
               <p class="text-xs font-bold text-slate-800">Massage parents' backs</p>
-              <p class="text-[10px] text-emerald-600 font-semibold">+1 Star</p>
+              <p class="text-[10px] text-emerald-600 font-semibold">+$1.00 & +1 Star</p>
             </div>
           </div>
-          <button onclick="rewardKid(1, 'Massage backs')" class="bg-emerald-500 active:scale-95 hover:bg-emerald-600 text-white text-xs font-bold px-3 py-1.5 rounded-lg shadow-sm transition">Approve (+1)</button>
+          <button onclick="rewardKid(1, 'Massage backs')" class="bg-emerald-500 active:scale-95 hover:bg-emerald-600 text-white text-xs font-bold px-3 py-1.5 rounded-lg shadow-sm transition">
+            Approve ($1)
+          </button>
         </div>
       </div>
     </div>
 
-    <!-- DAILY HABITS (SUPPORT TASKS) -->
-    <div class="bg-white rounded-3xl p-5 border border-slate-200 shadow-
+    <!-- DAILY HABITS (CÔNG VIỆC PHỤ THƯỞNG 1 SAO) -->
+    <div class="bg-white rounded-3xl p-5 border border-slate-200 shadow-sm space-y-3">
+      <div class="flex items-center justify-between border-b pb-2">
+        <h3 class="font-bold text-slate-700 text-sm flex items-center gap-2">
+          <i class="fa-solid fa-star text-indigo-500"></i> Daily Habits
+        </h3>
+        <span class="text-[10px] bg-slate-100 text-slate-500 px-2.5 py-0.5 rounded-full font-bold uppercase tracking-wider">Support Tasks (+1 ⭐)</span>
+      </div>
+
+      <div class="space-y-2">
+        <div class="flex items-center justify-between p-2.5 bg-slate-50 rounded-xl hover:bg-slate-100 transition">
+          <div class="flex items-center gap-2.5">
+            <span class="text-lg">🧸</span>
+            <div>
+              <p class="text-xs font-bold text-slate-800">Clean up toys after playing</p>
+              <p class="text-[10px] text-blue-600 font-semibold">+1 Star</p>
+            </div>
+          </div>
+          <button onclick="rewardKid(1, 'Clean toys')" class="bg-blue-500 active:scale-95 hover:bg-blue-600 text-white text-xs font-bold px-3 py-1.5 rounded-lg shadow-sm transition">
+            Approve (+1⭐)
+          </button>
+        </div>
+
+        <div class="flex items-center justify-between p-2.5 bg-slate-50 rounded-xl hover:bg-slate-100 transition">
+          <div class="flex items-center gap-2.5">
+            <span class="text-lg">🪥</span>
+            <div>
+              <p class="text-xs font-bold text-slate-800">Brush teeth before bedtime</p>
+              <p class="text-[10px] text-blue-600 font-semibold">+1 Star</p>
+            </div>
+          </div>
+          <button onclick="rewardKid(1, 'Brush teeth')" class="bg-blue-500 active:scale-95 hover:bg-blue-600 text-white text-xs font-bold px-3 py-1.5 rounded-lg shadow-sm transition">
+            Approve (+1⭐)
+          </button>
+        </div>
+
+        <div class="flex items-center justify-between p-2.5 bg-slate-50 rounded-xl hover:bg-slate-100 transition">
+          <div class="flex items-center gap-2.5">
+            <span class="text-lg">🥦</span>
+            <div>
+              <p class="text-xs font-bold text-slate-800">Eat all vegetables</p>
+              <p class="text-[10px] text-blue-600 font-semibold">+1 Star</p>
+            </div>
+          </div>
+          <button onclick="rewardKid(1, 'Eat vegetables')" class="bg-blue-500 active:scale-95 hover:bg-blue-600 text-white text-xs font-bold px-3 py-1.5 rounded-lg shadow-sm transition">
+            Approve (+1⭐)
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- KHU VỰC TIP TIỀN MẶT BẰNG $ -->
+    <div class="bg-white rounded-3xl p-5 border border-amber-200 shadow-sm space-y-3">
+      <div class="flex items-center justify-between border-b pb-2">
+        <label class="text-xs font-bold text-amber-950 flex items-center gap-1.5">
+          <i class="fa-solid fa-gift text-amber-500"></i> Parent Cash Tip ($)
+        </label>
+        <span class="text-[10px] bg-amber-100 text-amber-900 font-bold px-2 py-0.5 rounded-full">
+          $1.00 = 1 ⭐
+        </span>
+      </div>
+
+      <div class="grid grid-cols-3 gap-2">
+        <button onclick="quickTip(1)" class="bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-200 text-xs font-bold py-1.5 rounded-xl transition">
+          +$1.00 (1⭐)
+        </button>
+        <button onclick="quickTip(2)" class="bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-200 text-xs font-bold py-1.5 rounded-xl transition">
+          +$2.00 (2⭐)
+        </button>
+        <button onclick="quickTip(5)" class="bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-200 text-xs font-bold py-1.5 rounded-xl transition">
+          +$5.00 (5⭐)
+        </button>
+      </div>
+
+      <div class="flex gap-2 items-center pt-1">
+        <div class="relative w-1/2">
+          <span class="absolute left-3 top-2 text-xs font-bold text-slate-400">$</span>
+          <input id="customTipInput" type="number" min="1" step="1" placeholder="Custom $" class="w-full bg-slate-50 border border-slate-200 rounded-xl pl-6 pr-3 py-2 text-xs font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-amber-400">
+        </div>
+        <button onclick="sendCustomTip()" class="w-1/2 bg-amber-500 hover:bg-amber-600 active:scale-95 text-white text-xs font-bold py-2 rounded-xl transition flex items-center justify-center gap-1 shadow-sm">
+          <i class="fa-solid fa-coins"></i> Send Tip ($)
+        </button>
+      </div>
+    </div>
+
+    <!-- KHU VỰC RÚT TIỀN $ & ĐỔI SAO ⭐ THÀNH $ -->
+    <div class="bg-white rounded-3xl p-5 border border-slate-200 shadow-sm space-y-4">
+      
+      <!-- Ô 1: NHẬP SỐ TIỀN ĐÔ ($) MUỐN RÚT TỪ SAVE JAR -->
+      <div class="space-y-2 pb-3 border-b border-slate-100">
+        <label class="text-xs font-bold text-slate-800 flex items-center justify-between">
+          <span class="flex items-center gap-1.5"><i class="fa-solid fa-dollar-sign text-blue-600"></i> Withdraw Cash ($) from Save</span>
+          <span class="text-[10px] bg-blue-50 text-blue-700 font-bold px-2 py-0.5 rounded-md">$1 = 1 ⭐</span>
+        </label>
+        <div class="flex gap-2 items-center">
+          <div class="relative w-1/2">
+            <span class="absolute left-3 top-2 text-xs font-bold text-slate-400">$</span>
+            <input id="withdrawDollarInput" type="number" min="1" step="1" placeholder="0.00" oninput="updateDollarToStarPreview()" class="w-full bg-slate-50 border border-slate-200 rounded-xl pl-6 pr-3 py-2 text-xs font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-400">
+          </div>
+          <div class="w-1/2 bg-blue-50 border border-blue-200 rounded-xl px-3 py-2 text-xs font-bold text-blue-700 text-center">
+            = <span id="starCostPreview">0 ⭐</span>
+          </div>
+        </div>
+        <button onclick="withdrawDollars()" class="w-full bg-blue-600 hover:bg-blue-700 active:scale-95 text-white text-xs font-bold py-2 rounded-xl transition flex items-center justify-center gap-1 shadow-sm">
+          <i class="fa-solid fa-hand-holding-dollar"></i> Withdraw Dollars ($)
+        </button>
+      </div>
+
+      <!-- Ô 2: NHẬP SỐ SAO (⭐) MUỐN QUY ĐỔI RA TIỀN MẶT ($) -->
+      <div class="space-y-2">
+        <div class="flex items-center justify-between">
+          <label class="text-xs font-bold text-slate-800 flex items-center gap-1.5">
+            <i class="fa-solid fa-money-bill-transfer text-emerald-600"></i> Exchange Stars (⭐) for Cash ($)
+          </label>
+          <span class="text-[10px] bg-emerald-50 text-emerald-700 font-bold px-2 py-0.5 rounded-full border border-emerald-200">
+            1 ⭐ = $1.00
+          </span>
+        </div>
+        <div class="flex gap-2 items-center">
+          <div class="relative w-1/2">
+            <input id="exchangeStarInput" type="number" min="1" step="1" placeholder="Stars count" oninput="updateStarToDollarPreview()" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-400">
+            <span class="absolute right-3 top-2 text-xs text-amber-500">⭐</span>
+          </div>
+          <div class="w-1/2 bg-emerald-50 border border-emerald-200 rounded-xl px-3 py-2 text-xs font-bold text-emerald-700 text-center">
+            = <span id="cashValuePreview">$0.00</span>
+          </div>
+        </div>
+        <button onclick="exchangeStarsToCash()" class="w-full bg-emerald-500 hover:bg-emerald-600 active:scale-95 text-white text-xs font-bold py-2.5 rounded-xl transition flex items-center justify-center gap-1.5 shadow-sm">
+          <i class="fa-solid fa-check"></i> Confirm Cash Exchange ($)
+        </button>
+      </div>
+
+      <button onclick="resetData()" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-400 active:scale-95 text-[11px] py-1.5 rounded-xl font-medium transition mt-3">
+        Reset All Data
+      </button>
+    </div>
+
+  </div>
+
+  <!-- FIREBASE ENGINE & SYNC -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+    import { getFirestore, doc, onSnapshot, setDoc, updateDoc, increment } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyAywa4F-dWn001_6o-ImMd-dQdsE5OMfnI",
+      authDomain: "saving-money-for-my-kid.firebaseapp.com",
+      projectId: "saving-money-for-my-kid",
+      storageBucket: "saving-money-for-my-kid.firebasestorage.app",
+      messagingSenderId: "201005560393",
+      appId: "1:201005560393:web:434eff02f838594d480598"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const walletRef = doc(db, "family_wallets", "chau_wallet");
+
+    const now = new Date();
+    const currentYear = now.getFullYear();
+    const currentMonth = now.getMonth() + 1;
+    const currentMonthKey = `${currentYear}-${String(currentMonth).padStart(2, '0')}`;
+    const currentYearKey = `${currentYear}`;
+
+    const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    document.getElementById("monthNameLabel").innerText = monthNames[now.getMonth()];
+    document.getElementById("yearNameLabel").innerText = currentYear;
+    document.getElementById("currentDateLabel").innerText = `${monthNames[now.getMonth()]} ${now.getDate()}, ${currentYear}`;
+
+    function playCoinSound() {
+      try {
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(880, audioCtx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(1760, audioCtx.currentTime + 0.15);
+        gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.3);
+      } catch (e) {
+        console.log("Audio waiting for user touch");
+      }
+    }
+
+    let isFirstLoad = true;
+    onSnapshot(walletRef, async (snap) => {
+      if (snap.exists()) {
+        const data = snap.data();
+
+        const activeMonthKey = data.activeMonthKey || "";
+        const activeYearKey = data.activeYearKey || "";
+
+        if (activeMonthKey !== currentMonthKey || activeYearKey !== currentYearKey) {
+          await updateDoc(walletRef, {
+            activeMonthKey: currentMonthKey,
+            activeYearKey: currentYearKey,
+            earnedThisMonth: activeMonthKey !== currentMonthKey ? 0 : (data.earnedThisMonth || 0),
+            earnedThisYear: activeYearKey !== currentYearKey ? 0 : (data.earnedThisYear || 0)
+          });
+          return;
+        }
+
+        const spend = data.spend || 0;
+        const save = data.save || 0;
+        const give = data.give || 0;
+        const goal = data.goalTarget || 20;
+        const goalTitle = data.goalTitle || "Space Lego Set";
+        const goalEmoji = data.goalEmoji || "🚀";
+        const monthEarned = data.earnedThisMonth || 0;
+        const yearEarned = data.earnedThisYear || 0;
+
+        document.getElementById("spendCoins").innerText = spend;
+        document.getElementById("saveCoins").innerText = save;
+        document.getElementById("giveCoins").innerText = give;
+        document.getElementById("currentSave").innerText = save;
+        document.getElementById("currentGoalMax").innerText = goal;
+        document.getElementById("goalDollarsText").innerText = `$${goal.toFixed(2)}`;
+        
+        document.getElementById("monthEarnings").innerText = monthEarned;
+        document.getElementById("monthDollars").innerText = monthEarned.toFixed(2);
+        document.getElementById("yearEarnings").innerText = yearEarned;
+        document.getElementById("yearDollars").innerText = yearEarned.toFixed(2);
+
+        document.getElementById("goalTarget").innerText = `Goal: ${goal} ⭐`;
+        document.getElementById("goalTitleDisplay").innerText = goalTitle;
+        document.getElementById("goalEmoji").innerText = goalEmoji;
+
+        const percent = Math.min(Math.round((save / goal) * 100), 100);
+        document.getElementById("goalProgressBar").style.width = percent + "%";
+
+        if (!isFirstLoad) {
+          playCoinSound();
+          document.getElementById("saveCoins").classList.add("coin-pop");
+          setTimeout(() => document.getElementById("saveCoins").classList.remove("coin-pop"), 400);
+        }
+        isFirstLoad = false;
+      } else {
+        await setDoc(walletRef, {
+          spend: 0,
+          save: 0,
+          give: 0,
+          goalTarget: 20,
+          goalTitle: "Space Lego Set",
+          goalEmoji: "🚀",
+          earnedThisMonth: 0,
+          earnedThisYear: 0,
+          activeMonthKey: currentMonthKey,
+          activeYearKey: currentYearKey
+        });
+      }
+    });
+
+    window.toggleGoalEdit = function() {
+      const form = document.getElementById("goalEditForm");
+      if (form.classList.contains("hidden")) {
+        form.classList.remove("hidden");
+        document.getElementById("editGoalTitleInput").value = document.getElementById("goalTitleDisplay").innerText;
+        document.getElementById("editGoalEmojiInput").value = document.getElementById("goalEmoji").innerText;
+        document.getElementById("editGoalTargetInput").value = document.getElementById("currentGoalMax").innerText;
+      } else {
+        form.classList.add("hidden");
+      }
+    };
+
+    window.saveGoalDetails = async function() {
+      const newTitle = document.getElementById("editGoalTitleInput").value.trim() || "My Saving Goal";
+      const newEmoji = document.getElementById("editGoalEmojiInput").value.trim() || "🎁";
+      const newTarget = parseInt(document.getElementById("editGoalTargetInput").value);
+
+      if (isNaN(newTarget) || newTarget <= 0) {
+        alert("Please enter a valid target star count!");
+        return;
+      }
+
+      await updateDoc(walletRef, {
+        goalTitle: newTitle,
+        goalEmoji: newEmoji,
+        goalTarget: newTarget
+      });
+
+      document.getElementById("goalEditForm").classList.add("hidden");
+    };
+
+    // Duyệt thưởng: 1 việc = 1 sao (chia vào hũ và cộng vào tổng thu nhập)
+    window.rewardKid = async function(stars, taskName) {
+      await updateDoc(walletRef, {
+        save: increment(stars),
+        earnedThisMonth: increment(stars),
+        earnedThisYear: increment(stars)
+      });
+    };
+
+    // TIP TIỀN MẶT (1$ = 1⭐)
+    window.quickTip = async function(dollars) {
+      if (confirm(`Tip $${dollars.toFixed(2)} to Chau? (+${dollars} Stars)`)) {
+        await updateDoc(walletRef, {
+          save: increment(dollars),
+          earnedThisMonth: increment(dollars),
+          earnedThisYear: increment(dollars)
+        });
+      }
+    };
+
+    window.sendCustomTip = async function() {
+      const inputEl = document.getElementById("customTipInput");
+      const dollars = parseInt(inputEl.value);
+
+      if (isNaN(dollars) || dollars <= 0) {
+        alert("Please enter a valid tip amount ($)!");
+        return;
+      }
+
+      if (confirm(`Tip $${dollars.toFixed(2)} to Chau? (+${dollars} Stars)`)) {
+        await updateDoc(walletRef, {
+          save: increment(dollars),
+          earnedThisMonth: increment(dollars),
+          earnedThisYear: increment(dollars)
+        });
+        inputEl.value = "";
+      }
+    };
+
+    // RÚT TIỀN ĐÔ (1$ = 1⭐)
+    window.updateDollarToStarPreview = function() {
+      const dollars = parseFloat(document.getElementById("withdrawDollarInput").value);
+      if (!isNaN(dollars) && dollars > 0) {
+        document.getElementById("starCostPreview").innerText = `${dollars} ⭐`;
+      } else {
+        document.getElementById("starCostPreview").innerText = "0 ⭐";
+      }
+    };
+
+    window.withdrawDollars = async function() {
+      const inputEl = document.getElementById("withdrawDollarInput");
+      const dollars = parseInt(inputEl.value);
+
+      if (isNaN(dollars) || dollars <= 0) {
+        alert("Please enter a valid dollar amount ($)!");
+        return;
+      }
+
+      const currentSave = parseInt(document.getElementById("saveCoins").innerText);
+      if (currentSave < dollars) {
+        alert(`Not enough stars in Save jar! You need ${dollars} ⭐ for $${dollars.toFixed(2)}, but only have ${currentSave} ⭐.`);
+        return;
+      }
+
+      if (confirm(`Withdraw $${dollars.toFixed(2)} cash? This will deduct ${dollars} Stars (⭐) from Save jar.`)) {
+        await updateDoc(walletRef, {
+          save: increment(-dollars)
+        });
+        inputEl.value = "";
+        document.getElementById("starCostPreview").innerText = "0 ⭐";
+      }
+    };
+
+    // ĐỔI SAO RA ĐÔ (1⭐ = 1$)
+    window.updateStarToDollarPreview = function() {
+      const stars = parseFloat(document.getElementById("exchangeStarInput").value);
+      if (!isNaN(stars) && stars > 0) {
+        document.getElementById("cashValuePreview").innerText = `$${stars.toFixed(2)}`;
+      } else {
+        document.getElementById("cashValuePreview").innerText = "$0.00";
+      }
+    };
+
+    window.exchangeStarsToCash = async function() {
+      const inputEl = document.getElementById("exchangeStarInput");
+      const stars = parseInt(inputEl.value);
+
+      if (isNaN(stars) || stars <= 0) {
+        alert("Please enter a valid number of stars (⭐) to exchange!");
+        return;
+      }
+
+      const currentSave = parseInt(document.getElementById("saveCoins").innerText);
+      if (currentSave < stars) {
+        alert(`Not enough stars in Save jar! Current saved: ${currentSave} ⭐`);
+        return;
+      }
+
+      if (confirm(`Exchange ${stars} Stars (⭐) for $${stars.toFixed(2)} cash? (Will deduct from Save jar)`)) {
+        await updateDoc(walletRef, {
+          save: increment(-stars)
+        });
+        inputEl.value = "";
+        document.getElementById("cashValuePreview").innerText = "$0.00";
+      }
+    };
+
+    window.resetData = async function() {
+      if (confirm("Are you sure you want to reset all jars and stats to 0?")) {
+        await setDoc(walletRef, {
+          spend: 0,
+          save: 0,
+          give: 0,
+          goalTarget: 20,
+          goalTitle: "Space Lego Set",
+          goalEmoji: "🚀",
+          earnedThisMonth: 0,
+          earnedThisYear: 0,
+          activeMonthKey: currentMonthKey,
+          activeYearKey: currentYearKey
+        });
+      }
+    };
+  </script>
+</body>
+</html>
