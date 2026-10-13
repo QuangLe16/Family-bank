@@ -41,23 +41,23 @@
       <div class="bg-white rounded-2xl p-3 text-center border-2 border-emerald-200 shadow-sm relative overflow-hidden">
         <div class="text-2xl mb-1">🍦</div>
         <div class="text-xs font-bold text-slate-500 uppercase tracking-tight">Spend</div>
-        <div id="spendCoins" class="text-xl font-black text-emerald-600 my-1">0</div>
-        <div class="text-[10px] text-slate-400">Treats / Snacks</div>
+        <div class="text-xl font-black text-emerald-600 my-1"><span id="spendCoins">0</span> ⭐</div>
+        <div class="text-[10px] text-slate-400">Daily Treats</div>
       </div>
 
       <!-- Jar 2: Save -->
       <div class="bg-white rounded-2xl p-3 text-center border-2 border-blue-200 shadow-sm relative overflow-hidden ring-2 ring-blue-100">
         <div class="text-2xl mb-1">🎁</div>
         <div class="text-xs font-bold text-blue-700 uppercase tracking-tight">Save</div>
-        <div id="saveCoins" class="text-xl font-black text-blue-600 my-1">0</div>
-        <div class="text-[10px] text-slate-400">Cash / Goals</div>
+        <div class="text-xl font-black text-blue-600 my-1"><span id="saveCoins">0</span> ⭐</div>
+        <div class="text-[10px] text-slate-400">Goals & Cash ($)</div>
       </div>
 
       <!-- Jar 3: Share -->
       <div class="bg-white rounded-2xl p-3 text-center border-2 border-rose-200 shadow-sm relative overflow-hidden">
         <div class="text-2xl mb-1">💖</div>
         <div class="text-xs font-bold text-slate-500 uppercase tracking-tight">Share</div>
-        <div id="giveCoins" class="text-xl font-black text-rose-600 my-1">0</div>
+        <div class="text-xl font-black text-rose-600 my-1"><span id="giveCoins">0</span> ⭐</div>
         <div class="text-[10px] text-slate-400">Gifts & Friends</div>
       </div>
     </div>
@@ -74,35 +74,60 @@
         <div class="bg-amber-50/70 rounded-xl p-2.5 border border-amber-100">
           <div class="text-[11px] font-bold text-slate-500">This Month (<span id="monthNameLabel"></span>)</div>
           <div class="text-lg font-black text-amber-700 mt-0.5"><span id="monthEarnings">0</span> ⭐</div>
+          <div class="text-[10px] text-amber-600/80 font-semibold mt-0.5">≈ $<span id="monthDollars">0.00</span></div>
         </div>
         <div class="bg-indigo-50/70 rounded-xl p-2.5 border border-indigo-100">
           <div class="text-[11px] font-bold text-slate-500">This Year (<span id="yearNameLabel"></span>)</div>
           <div class="text-lg font-black text-indigo-700 mt-0.5"><span id="yearEarnings">0</span> ⭐</div>
+          <div class="text-[10px] text-indigo-600/80 font-semibold mt-0.5">≈ $<span id="yearDollars">0.00</span></div>
         </div>
       </div>
     </div>
 
     <!-- WISH / SAVING GOAL -->
-    <div class="bg-white rounded-3xl p-5 border border-amber-200 shadow-sm">
-      <div class="flex items-center justify-between mb-2">
+    <div class="bg-white rounded-3xl p-5 border border-amber-200 shadow-sm space-y-3">
+      <div class="flex items-center justify-between">
         <span class="text-[11px] font-bold uppercase tracking-wide text-slate-400">Saving Target</span>
-        <span class="text-xs font-bold text-amber-600" id="goalTarget">Goal: 20 ⭐</span>
+        <div class="flex items-center gap-2">
+          <span class="text-xs font-bold text-amber-600" id="goalTarget">Goal: 20 ⭐</span>
+          <button onclick="toggleGoalEdit()" class="text-[11px] bg-amber-100 hover:bg-amber-200 text-amber-800 px-2 py-0.5 rounded-lg font-semibold transition flex items-center gap-1">
+            <i class="fa-solid fa-pen text-[9px]"></i> Edit
+          </button>
+        </div>
       </div>
-      <div class="flex items-center gap-3.5 mb-3">
-        <div class="w-12 h-12 bg-amber-100 rounded-2xl flex items-center justify-center text-2xl shadow-inner">
+
+      <div class="flex items-center gap-3.5">
+        <div id="goalEmoji" class="w-12 h-12 bg-amber-100 rounded-2xl flex items-center justify-center text-2xl shadow-inner select-none">
           🚀
         </div>
         <div>
-          <h3 class="font-bold text-slate-800 text-sm sm:text-base">Space Lego Set</h3>
-          <p class="text-xs text-slate-500">Saved: <span id="currentSave" class="font-bold text-blue-600">0</span> / 20 ⭐</p>
+          <h3 id="goalTitleDisplay" class="font-bold text-slate-800 text-sm sm:text-base">Space Lego Set</h3>
+          <p class="text-xs text-slate-500">Saved: <span id="currentSave" class="font-bold text-blue-600">0</span> / <span id="currentGoalMax">20</span> ⭐ (<span id="goalDollarsText">$4.00</span>)</p>
         </div>
       </div>
+
       <div class="w-full bg-slate-100 h-3 rounded-full overflow-hidden p-0.5 border border-slate-200">
         <div id="goalProgressBar" class="bg-gradient-to-r from-blue-400 to-indigo-500 h-full rounded-full transition-all duration-500" style="width: 0%"></div>
       </div>
+
+      <!-- Form edit goal -->
+      <div id="goalEditForm" class="hidden bg-slate-50 border border-slate-200 rounded-2xl p-3 space-y-2.5 mt-2">
+        <div class="text-[11px] font-bold text-slate-600 uppercase tracking-wide">Update Goal Details</div>
+        <div class="grid grid-cols-4 gap-2">
+          <input id="editGoalEmojiInput" type="text" placeholder="🚀" class="col-span-1 bg-white border border-slate-200 rounded-xl px-2 py-1.5 text-center text-base font-bold focus:outline-none focus:ring-2 focus:ring-amber-400">
+          <input id="editGoalTitleInput" type="text" placeholder="Goal Name (e.g. Lego)" class="col-span-3 bg-white border border-slate-200 rounded-xl px-3 py-1.5 text-xs font-medium focus:outline-none focus:ring-2 focus:ring-amber-400">
+        </div>
+        <div class="flex gap-2 items-center">
+          <input id="editGoalTargetInput" type="number" min="1" step="1" placeholder="Target Stars (e.g. 20)" class="w-1/2 bg-white border border-slate-200 rounded-xl px-3 py-1.5 text-xs font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-amber-400">
+          <div class="w-1/2 flex gap-1.5">
+            <button onclick="saveGoalDetails()" class="flex-1 bg-amber-500 hover:bg-amber-600 text-white text-xs font-bold py-1.5 rounded-xl shadow-sm transition">Save</button>
+            <button onclick="toggleGoalEdit()" class="px-2.5 bg-slate-200 hover:bg-slate-300 text-slate-600 text-xs font-semibold rounded-xl transition">Cancel</button>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <!-- NHÓM 1: HOUSEWORK (CÔNG VIỆC NHÀ CHÍNH) -->
+    <!-- MAIN HOUSEWORK -->
     <div class="bg-white rounded-3xl p-5 border border-slate-200 shadow-sm space-y-3">
       <div class="flex items-center justify-between border-b pb-2">
         <h3 class="font-bold text-slate-800 text-sm flex items-center gap-2">
@@ -112,7 +137,6 @@
       </div>
 
       <div class="space-y-2">
-        <!-- Quét nhà -->
         <div class="flex items-center justify-between p-2.5 bg-slate-50 rounded-xl hover:bg-slate-100 transition">
           <div class="flex items-center gap-2.5">
             <span class="text-lg">🧹</span>
@@ -121,12 +145,9 @@
               <p class="text-[10px] text-emerald-600 font-semibold">+2 Stars</p>
             </div>
           </div>
-          <button onclick="rewardKid(2, 'Sweep floor')" class="bg-emerald-500 active:scale-95 hover:bg-emerald-600 text-white text-xs font-bold px-3 py-1.5 rounded-lg shadow-sm transition">
-            Approve (+2)
-          </button>
+          <button onclick="rewardKid(2, 'Sweep floor')" class="bg-emerald-500 active:scale-95 hover:bg-emerald-600 text-white text-xs font-bold px-3 py-1.5 rounded-lg shadow-sm transition">Approve (+2)</button>
         </div>
 
-        <!-- Lau nhà -->
         <div class="flex items-center justify-between p-2.5 bg-slate-50 rounded-xl hover:bg-slate-100 transition">
           <div class="flex items-center gap-2.5">
             <span class="text-lg">🪣</span>
@@ -135,12 +156,9 @@
               <p class="text-[10px] text-emerald-600 font-semibold">+2 Stars</p>
             </div>
           </div>
-          <button onclick="rewardKid(2, 'Mop floor')" class="bg-emerald-500 active:scale-95 hover:bg-emerald-600 text-white text-xs font-bold px-3 py-1.5 rounded-lg shadow-sm transition">
-            Approve (+2)
-          </button>
+          <button onclick="rewardKid(2, 'Mop floor')" class="bg-emerald-500 active:scale-95 hover:bg-emerald-600 text-white text-xs font-bold px-3 py-1.5 rounded-lg shadow-sm transition">Approve (+2)</button>
         </div>
 
-        <!-- Gãi lưng cho ba -->
         <div class="flex items-center justify-between p-2.5 bg-slate-50 rounded-xl hover:bg-slate-100 transition">
           <div class="flex items-center gap-2.5">
             <span class="text-lg">🙌</span>
@@ -149,12 +167,9 @@
               <p class="text-[10px] text-emerald-600 font-semibold">+1 Star</p>
             </div>
           </div>
-          <button onclick="rewardKid(1, 'Scratch dad back')" class="bg-emerald-500 active:scale-95 hover:bg-emerald-600 text-white text-xs font-bold px-3 py-1.5 rounded-lg shadow-sm transition">
-            Approve (+1)
-          </button>
+          <button onclick="rewardKid(1, 'Scratch dad back')" class="bg-emerald-500 active:scale-95 hover:bg-emerald-600 text-white text-xs font-bold px-3 py-1.5 rounded-lg shadow-sm transition">Approve (+1)</button>
         </div>
 
-        <!-- Đấm lưng cho ba mẹ -->
         <div class="flex items-center justify-between p-2.5 bg-slate-50 rounded-xl hover:bg-slate-100 transition">
           <div class="flex items-center gap-2.5">
             <span class="text-lg">💆‍♂️</span>
@@ -163,271 +178,10 @@
               <p class="text-[10px] text-emerald-600 font-semibold">+1 Star</p>
             </div>
           </div>
-          <button onclick="rewardKid(1, 'Massage backs')" class="bg-emerald-500 active:scale-95 hover:bg-emerald-600 text-white text-xs font-bold px-3 py-1.5 rounded-lg shadow-sm transition">
-            Approve (+1)
-          </button>
+          <button onclick="rewardKid(1, 'Massage backs')" class="bg-emerald-500 active:scale-95 hover:bg-emerald-600 text-white text-xs font-bold px-3 py-1.5 rounded-lg shadow-sm transition">Approve (+1)</button>
         </div>
       </div>
     </div>
 
-    <!-- NHÓM 2: DAILY HABITS (VIỆC PHỤ TRỢ TÍCH LUỸ SAO) -->
-    <div class="bg-white rounded-3xl p-5 border border-slate-200 shadow-sm space-y-3">
-      <div class="flex items-center justify-between border-b pb-2">
-        <h3 class="font-bold text-slate-700 text-sm flex items-center gap-2">
-          <i class="fa-solid fa-star text-indigo-500"></i> Daily Habits
-        </h3>
-        <span class="text-[10px] bg-slate-100 text-slate-500 px-2.5 py-0.5 rounded-full font-bold uppercase tracking-wider">Support Tasks</span>
-      </div>
-
-      <div class="space-y-2">
-        <!-- Dọn đồ chơi -->
-        <div class="flex items-center justify-between p-2.5 bg-slate-50 rounded-xl hover:bg-slate-100 transition">
-          <div class="flex items-center gap-2.5">
-            <span class="text-lg">🧸</span>
-            <div>
-              <p class="text-xs font-bold text-slate-800">Clean up toys after playing</p>
-              <p class="text-[10px] text-emerald-600 font-semibold">+2 Stars</p>
-            </div>
-          </div>
-          <button onclick="rewardKid(2, 'Clean toys')" class="bg-emerald-500 active:scale-95 hover:bg-emerald-600 text-white text-xs font-bold px-3 py-1.5 rounded-lg shadow-sm transition">
-            Approve (+2)
-          </button>
-        </div>
-
-        <!-- Đánh răng -->
-        <div class="flex items-center justify-between p-2.5 bg-slate-50 rounded-xl hover:bg-slate-100 transition">
-          <div class="flex items-center gap-2.5">
-            <span class="text-lg">🪥</span>
-            <div>
-              <p class="text-xs font-bold text-slate-800">Brush teeth before bedtime</p>
-              <p class="text-[10px] text-emerald-600 font-semibold">+1 Star</p>
-            </div>
-          </div>
-          <button onclick="rewardKid(1, 'Brush teeth')" class="bg-emerald-500 active:scale-95 hover:bg-emerald-600 text-white text-xs font-bold px-3 py-1.5 rounded-lg shadow-sm transition">
-            Approve (+1)
-          </button>
-        </div>
-
-        <!-- Ăn rau -->
-        <div class="flex items-center justify-between p-2.5 bg-slate-50 rounded-xl hover:bg-slate-100 transition">
-          <div class="flex items-center gap-2.5">
-            <span class="text-lg">🥦</span>
-            <div>
-              <p class="text-xs font-bold text-slate-800">Eat all vegetables</p>
-              <p class="text-[10px] text-emerald-600 font-semibold">+1 Star</p>
-            </div>
-          </div>
-          <button onclick="rewardKid(1, 'Eat vegetables')" class="bg-emerald-500 active:scale-95 hover:bg-emerald-600 text-white text-xs font-bold px-3 py-1.5 rounded-lg shadow-sm transition">
-            Approve (+1)
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <!-- KHU VỰC EXCHANGE TIỀN MẶT (5 SAO = $1) -->
-    <div class="bg-white rounded-3xl p-5 border border-slate-200 shadow-sm space-y-3">
-      <div class="flex items-center justify-between border-b pb-2">
-        <label class="text-xs font-bold text-slate-800 flex items-center gap-1.5">
-          <i class="fa-solid fa-money-bill-transfer text-emerald-600"></i> Exchange for Cash ($)
-        </label>
-        <span class="text-[10px] bg-emerald-50 text-emerald-700 font-bold px-2 py-0.5 rounded-full border border-emerald-200">
-          Rate: 5 ⭐ = $1.00
-        </span>
-      </div>
-
-      <p class="text-[11px] text-slate-500">
-        Enter stars to exchange for cash. Stars are deducted directly from the <span class="font-bold text-blue-600">Save jar</span>.
-      </p>
-
-      <div class="space-y-2">
-        <div class="flex gap-2 items-center">
-          <input id="exchangeAmountInput" type="number" min="1" step="1" placeholder="Stars (e.g. 5)" oninput="updateCashPreview()" class="w-1/2 bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-400">
-          
-          <div class="w-1/2 bg-emerald-50 border border-emerald-200 rounded-xl px-3 py-2 text-xs font-bold text-emerald-700 text-center">
-            = <span id="cashValuePreview">$0.00</span>
-          </div>
-        </div>
-
-        <button onclick="exchangeFromSave()" class="w-full bg-emerald-500 hover:bg-emerald-600 active:scale-95 text-white text-xs font-bold py-2.5 rounded-xl transition flex items-center justify-center gap-1.5 shadow-sm">
-          <i class="fa-solid fa-check"></i> Confirm Cash Exchange
-        </button>
-      </div>
-
-      <button onclick="resetData()" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-400 active:scale-95 text-[11px] py-1.5 rounded-xl font-medium transition mt-2">
-        Reset All Data
-      </button>
-    </div>
-
-  </div>
-
-  <!-- SCRIPT FIREBASE & REAL-TIME SYNC -->
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
-    import { getFirestore, doc, onSnapshot, setDoc, updateDoc, increment } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
-
-    const firebaseConfig = {
-      apiKey: "AIzaSyAywa4F-dWn001_6o-ImMd-dQdsE5OMfnI",
-      authDomain: "saving-money-for-my-kid.firebaseapp.com",
-      projectId: "saving-money-for-my-kid",
-      storageBucket: "saving-money-for-my-kid.firebasestorage.app",
-      messagingSenderId: "201005560393",
-      appId: "1:201005560393:web:434eff02f838594d480598"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
-    const walletRef = doc(db, "family_wallets", "chau_wallet");
-
-    const now = new Date();
-    const currentYear = now.getFullYear();
-    const currentMonth = now.getMonth() + 1;
-    const currentMonthKey = `${currentYear}-${String(currentMonth).padStart(2, '0')}`;
-    const currentYearKey = `${currentYear}`;
-
-    const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-    document.getElementById("monthNameLabel").innerText = monthNames[now.getMonth()];
-    document.getElementById("yearNameLabel").innerText = currentYear;
-    document.getElementById("currentDateLabel").innerText = `${monthNames[now.getMonth()]} ${now.getDate()}, ${currentYear}`;
-
-    function playCoinSound() {
-      try {
-        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        const osc = audioCtx.createOscillator();
-        const gain = audioCtx.createGain();
-        osc.type = 'triangle';
-        osc.frequency.setValueAtTime(880, audioCtx.currentTime);
-        osc.frequency.exponentialRampToValueAtTime(1760, audioCtx.currentTime + 0.15);
-        gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
-        osc.connect(gain);
-        gain.connect(audioCtx.destination);
-        osc.start();
-        osc.stop(audioCtx.currentTime + 0.3);
-      } catch (e) {
-        console.log("Audio waiting for user touch");
-      }
-    }
-
-    let isFirstLoad = true;
-    onSnapshot(walletRef, async (snap) => {
-      if (snap.exists()) {
-        const data = snap.data();
-
-        const activeMonthKey = data.activeMonthKey || "";
-        const activeYearKey = data.activeYearKey || "";
-
-        if (activeMonthKey !== currentMonthKey || activeYearKey !== currentYearKey) {
-          await updateDoc(walletRef, {
-            activeMonthKey: currentMonthKey,
-            activeYearKey: currentYearKey,
-            earnedThisMonth: activeMonthKey !== currentMonthKey ? 0 : (data.earnedThisMonth || 0),
-            earnedThisYear: activeYearKey !== currentYearKey ? 0 : (data.earnedThisYear || 0)
-          });
-          return;
-        }
-
-        const spend = data.spend || 0;
-        const save = data.save || 0;
-        const give = data.give || 0;
-        const goal = data.goalTarget || 20;
-        const monthEarned = data.earnedThisMonth || 0;
-        const yearEarned = data.earnedThisYear || 0;
-
-        document.getElementById("spendCoins").innerText = spend;
-        document.getElementById("saveCoins").innerText = save;
-        document.getElementById("giveCoins").innerText = give;
-        document.getElementById("currentSave").innerText = save;
-        document.getElementById("monthEarnings").innerText = monthEarned;
-        document.getElementById("yearEarnings").innerText = yearEarned;
-
-        const percent = Math.min(Math.round((save / goal) * 100), 100);
-        document.getElementById("goalProgressBar").style.width = percent + "%";
-
-        if (!isFirstLoad) {
-          playCoinSound();
-          document.getElementById("saveCoins").classList.add("coin-pop");
-          setTimeout(() => document.getElementById("saveCoins").classList.remove("coin-pop"), 400);
-        }
-        isFirstLoad = false;
-      } else {
-        await setDoc(walletRef, {
-          spend: 0,
-          save: 0,
-          give: 0,
-          goalTarget: 20,
-          earnedThisMonth: 0,
-          earnedThisYear: 0,
-          activeMonthKey: currentMonthKey,
-          activeYearKey: currentYearKey
-        });
-      }
-    });
-
-    // Duyệt việc (chia 50% spend, 50% save và cộng vào tổng tháng/năm)
-    window.rewardKid = async function(stars, taskName) {
-      const spendPart = Math.ceil(stars * 0.5);
-      const savePart = stars - spendPart;
-
-      await updateDoc(walletRef, {
-        spend: increment(spendPart),
-        save: increment(savePart),
-        earnedThisMonth: increment(stars),
-        earnedThisYear: increment(stars)
-      });
-    };
-
-    // Tự động tính số tiền mặt hiển thị trước: 5 sao = $1
-    window.updateCashPreview = function() {
-      const stars = parseFloat(document.getElementById("exchangeAmountInput").value);
-      if (!isNaN(stars) && stars > 0) {
-        const dollars = (stars / 5).toFixed(2);
-        document.getElementById("cashValuePreview").innerText = `$${dollars}`;
-      } else {
-        document.getElementById("cashValuePreview").innerText = "$0.00";
-      }
-    };
-
-    // Đổi sao từ hũ Save lấy tiền mặt
-    window.exchangeFromSave = async function() {
-      const inputEl = document.getElementById("exchangeAmountInput");
-      const stars = parseInt(inputEl.value);
-
-      if (isNaN(stars) || stars <= 0) {
-        alert("Please enter a valid number of stars to exchange!");
-        return;
-      }
-
-      const currentSave = parseInt(document.getElementById("saveCoins").innerText);
-      if (currentSave < stars) {
-        alert(`Not enough stars in Save jar! Current saved: ${currentSave} ⭐`);
-        return;
-      }
-
-      const cashValue = (stars / 5).toFixed(2);
-      if (confirm(`Exchange ${stars} Stars for $${cashValue} cash now? (Will deduct from Save jar)`)) {
-        await updateDoc(walletRef, {
-          save: increment(-stars)
-        });
-        inputEl.value = "";
-        document.getElementById("cashValuePreview").innerText = "$0.00";
-      }
-    };
-
-    // Đặt lại toàn bộ dữ liệu
-    window.resetData = async function() {
-      if (confirm("Are you sure you want to reset all jars and stats to 0?")) {
-        await setDoc(walletRef, {
-          spend: 0,
-          save: 0,
-          give: 0,
-          goalTarget: 20,
-          earnedThisMonth: 0,
-          earnedThisYear: 0,
-          activeMonthKey: currentMonthKey,
-          activeYearKey: currentYearKey
-        });
-      }
-    };
-  </script>
-</body>
-</html>
+    <!-- DAILY HABITS (SUPPORT TASKS) -->
+    <div class="bg-white rounded-3xl p-5 border border-slate-200 shadow-
