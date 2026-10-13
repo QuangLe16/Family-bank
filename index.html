@@ -19,7 +19,7 @@
     }
   </style>
 </head>
-<body class="bg-[#FFFDF5] min-h-screen text-slate-800 font-sans p-4 sm:p-6 pb-36">
+<body class="bg-[#FFFDF5] min-h-screen text-slate-800 font-sans p-4 sm:p-6 pb-28">
 
   <!-- Header -->
   <div class="max-w-md mx-auto text-center mb-5">
@@ -35,7 +35,7 @@
   <!-- Main Container -->
   <div class="max-w-md mx-auto space-y-4">
 
-    <!-- 3 JARS -->
+    <!-- 1. 3 JARS -->
     <div class="grid grid-cols-3 gap-3">
       <!-- Jar 1: Spend -->
       <div class="bg-white rounded-2xl p-3 text-center border-2 border-emerald-200 shadow-sm relative overflow-hidden">
@@ -62,7 +62,7 @@
       </div>
     </div>
 
-    <!-- CALENDAR EARNINGS SUMMARY -->
+    <!-- 2. CALENDAR EARNINGS SUMMARY -->
     <div class="bg-white rounded-2xl p-4 border border-amber-200 shadow-sm">
       <div class="flex items-center justify-between mb-2 pb-1.5 border-b border-slate-100">
         <span class="text-xs font-bold uppercase tracking-wider text-slate-500 flex items-center gap-1.5">
@@ -84,7 +84,76 @@
       </div>
     </div>
 
-    <!-- WISH / SAVING GOAL -->
+    <!-- 3. KHU VỰC RÚT TIỀN, ĐỔI SAO & TRỪ SỬA SAI (ĐÃ CHUYỂN LÊN DƯỚI TOTAL EARNINGS) -->
+    <div class="bg-white rounded-3xl p-5 border border-slate-200 shadow-sm space-y-4">
+      
+      <!-- Ô 1: RÚT TIỀN ĐÔ ($) TỪ SAVE JAR -->
+      <div class="space-y-2 pb-3 border-b border-slate-100">
+        <label class="text-xs font-bold text-slate-800 flex items-center justify-between">
+          <span class="flex items-center gap-1.5"><i class="fa-solid fa-dollar-sign text-blue-600"></i> Withdraw Cash ($) from Save</span>
+          <span class="text-[10px] bg-blue-50 text-blue-700 font-bold px-2 py-0.5 rounded-md">$1 = 1 ⭐</span>
+        </label>
+        <div class="flex gap-2 items-center">
+          <div class="relative w-1/2">
+            <span class="absolute left-3 top-2 text-xs font-bold text-slate-400">$</span>
+            <input id="withdrawDollarInput" type="number" min="1" step="1" placeholder="0.00" oninput="updateDollarToStarPreview()" class="w-full bg-slate-50 border border-slate-200 rounded-xl pl-6 pr-3 py-2 text-xs font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-400">
+          </div>
+          <div class="w-1/2 bg-blue-50 border border-blue-200 rounded-xl px-3 py-2 text-xs font-bold text-blue-700 text-center">
+            = <span id="starCostPreview">0 ⭐</span>
+          </div>
+        </div>
+        <button onclick="withdrawDollars()" class="w-full bg-blue-600 hover:bg-blue-700 active:scale-95 text-white text-xs font-bold py-2 rounded-xl transition flex items-center justify-center gap-1 shadow-sm">
+          <i class="fa-solid fa-hand-holding-dollar"></i> Withdraw Dollars ($)
+        </button>
+      </div>
+
+      <!-- Ô 2: ĐỔI TỪ SAO (⭐) RA TIỀN MẶT ($) -->
+      <div class="space-y-2 pb-3 border-b border-slate-100">
+        <div class="flex items-center justify-between">
+          <label class="text-xs font-bold text-slate-800 flex items-center gap-1.5">
+            <i class="fa-solid fa-money-bill-transfer text-emerald-600"></i> Exchange Stars (⭐) for Cash ($)
+          </label>
+          <span class="text-[10px] bg-emerald-50 text-emerald-700 font-bold px-2 py-0.5 rounded-full border border-emerald-200">
+            1 ⭐ = $1.00
+          </span>
+        </div>
+        <div class="flex gap-2 items-center">
+          <div class="relative w-1/2">
+            <input id="exchangeStarInput" type="number" min="1" step="1" placeholder="Stars count" oninput="updateStarToDollarPreview()" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-400">
+            <span class="absolute right-3 top-2 text-xs text-amber-500">⭐</span>
+          </div>
+          <div class="w-1/2 bg-emerald-50 border border-emerald-200 rounded-xl px-3 py-2 text-xs font-bold text-emerald-700 text-center">
+            = <span id="cashValuePreview">$0.00</span>
+          </div>
+        </div>
+        <button onclick="exchangeStarsToCash()" class="w-full bg-emerald-500 hover:bg-emerald-600 active:scale-95 text-white text-xs font-bold py-2.5 rounded-xl transition flex items-center justify-center gap-1.5 shadow-sm">
+          <i class="fa-solid fa-check"></i> Confirm Cash Exchange ($)
+        </button>
+      </div>
+
+      <!-- Ô 3: TRỪ SỬA SAI KHI LỠ CỘNG NHẦM -->
+      <div class="space-y-2">
+        <div class="flex items-center justify-between">
+          <label class="text-xs font-bold text-rose-800 flex items-center gap-1.5">
+            <i class="fa-solid fa-rotate-left text-rose-500"></i> Correct / Minus Mistake
+          </label>
+          <span class="text-[10px] bg-rose-100 text-rose-700 font-bold px-2 py-0.5 rounded-full">
+            Fix Mistake
+          </span>
+        </div>
+        <div class="flex gap-2 items-center">
+          <div class="relative w-2/3">
+            <input id="mistakeAmountInput" type="number" min="1" step="1" placeholder="Amount ($ or ⭐)" class="w-full bg-rose-50/50 border border-rose-200 rounded-xl px-3 py-2 text-xs font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-rose-400">
+          </div>
+          <button onclick="minusMistake()" class="w-1/3 bg-rose-500 hover:bg-rose-600 active:scale-95 text-white text-xs font-bold py-2 rounded-xl transition flex items-center justify-center gap-1 shadow-sm">
+            <i class="fa-solid fa-minus"></i> Correct
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 4. WISH / SAVING GOAL -->
     <div class="bg-white rounded-3xl p-5 border border-amber-200 shadow-sm space-y-3">
       <div class="flex items-center justify-between">
         <span class="text-[11px] font-bold uppercase tracking-wide text-slate-400">Saving Target</span>
@@ -127,7 +196,7 @@
       </div>
     </div>
 
-    <!-- MAIN HOUSEWORK (CÔNG VIỆC TRẢ TIỀN MẶT $1 & 1⭐) -->
+    <!-- 5. MAIN HOUSEWORK (CÔNG VIỆC TRẢ TIỀN MẶT $1 & 1⭐) -->
     <div class="bg-white rounded-3xl p-5 border border-slate-200 shadow-sm space-y-3">
       <div class="flex items-center justify-between border-b pb-2">
         <h3 class="font-bold text-slate-800 text-sm flex items-center gap-2">
@@ -191,7 +260,7 @@
       </div>
     </div>
 
-    <!-- DAILY HABITS (CÔNG VIỆC PHỤ THƯỞNG 1 SAO) -->
+    <!-- 6. DAILY HABITS (CÔNG VIỆC PHỤ THƯỞNG 1 SAO) -->
     <div class="bg-white rounded-3xl p-5 border border-slate-200 shadow-sm space-y-3">
       <div class="flex items-center justify-between border-b pb-2">
         <h3 class="font-bold text-slate-700 text-sm flex items-center gap-2">
@@ -242,7 +311,7 @@
       </div>
     </div>
 
-    <!-- KHU VỰC TIP TIỀN MẶT BẰNG $ -->
+    <!-- 7. KHU VỰC TIP TIỀN MẶT BẰNG $ -->
     <div class="bg-white rounded-3xl p-5 border border-amber-200 shadow-sm space-y-3">
       <div class="flex items-center justify-between border-b pb-2">
         <label class="text-xs font-bold text-amber-950 flex items-center gap-1.5">
@@ -276,80 +345,10 @@
       </div>
     </div>
 
-    <!-- KHU VỰC SỬA SAI / TRỪ LẠI KHI BẤM CỘNG NHẦM (MỚI) -->
-    <div class="bg-white rounded-3xl p-5 border border-rose-200 shadow-sm space-y-3">
-      <div class="flex items-center justify-between border-b pb-2">
-        <label class="text-xs font-bold text-rose-800 flex items-center gap-1.5">
-          <i class="fa-solid fa-rotate-left text-rose-500"></i> Correct / Minus Mistake
-        </label>
-        <span class="text-[10px] bg-rose-100 text-rose-700 font-bold px-2 py-0.5 rounded-full">
-          Fix Added Mistake
-        </span>
-      </div>
-      <p class="text-[11px] text-slate-500">
-        Did you accidentally tap too many times? Enter amount ($ / ⭐) to deduct from Save jar and fix stats:
-      </p>
-      <div class="flex gap-2 items-center">
-        <div class="relative w-2/3">
-          <input id="mistakeAmountInput" type="number" min="1" step="1" placeholder="Amount ($ or ⭐)" class="w-full bg-rose-50/50 border border-rose-200 rounded-xl px-3 py-2 text-xs font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-rose-400">
-        </div>
-        <button onclick="minusMistake()" class="w-1/3 bg-rose-500 hover:bg-rose-600 active:scale-95 text-white text-xs font-bold py-2 rounded-xl transition flex items-center justify-center gap-1 shadow-sm">
-          <i class="fa-solid fa-minus"></i> Correct
-        </button>
-      </div>
-    </div>
-
-    <!-- KHU VỰC RÚT TIỀN $ & ĐỔI SAO ⭐ THÀNH $ -->
-    <div class="bg-white rounded-3xl p-5 border border-slate-200 shadow-sm space-y-4">
-      
-      <!-- Ô 1: NHẬP SỐ TIỀN ĐÔ ($) MUỐN RÚT TỪ SAVE JAR -->
-      <div class="space-y-2 pb-3 border-b border-slate-100">
-        <label class="text-xs font-bold text-slate-800 flex items-center justify-between">
-          <span class="flex items-center gap-1.5"><i class="fa-solid fa-dollar-sign text-blue-600"></i> Withdraw Cash ($) from Save</span>
-          <span class="text-[10px] bg-blue-50 text-blue-700 font-bold px-2 py-0.5 rounded-md">$1 = 1 ⭐</span>
-        </label>
-        <div class="flex gap-2 items-center">
-          <div class="relative w-1/2">
-            <span class="absolute left-3 top-2 text-xs font-bold text-slate-400">$</span>
-            <input id="withdrawDollarInput" type="number" min="1" step="1" placeholder="0.00" oninput="updateDollarToStarPreview()" class="w-full bg-slate-50 border border-slate-200 rounded-xl pl-6 pr-3 py-2 text-xs font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-400">
-          </div>
-          <div class="w-1/2 bg-blue-50 border border-blue-200 rounded-xl px-3 py-2 text-xs font-bold text-blue-700 text-center">
-            = <span id="starCostPreview">0 ⭐</span>
-          </div>
-        </div>
-        <button onclick="withdrawDollars()" class="w-full bg-blue-600 hover:bg-blue-700 active:scale-95 text-white text-xs font-bold py-2 rounded-xl transition flex items-center justify-center gap-1 shadow-sm">
-          <i class="fa-solid fa-hand-holding-dollar"></i> Withdraw Dollars ($)
-        </button>
-      </div>
-
-      <!-- Ô 2: NHẬP SỐ SAO (⭐) MUỐN QUY ĐỔI RA TIỀN MẶT ($) -->
-      <div class="space-y-2">
-        <div class="flex items-center justify-between">
-          <label class="text-xs font-bold text-slate-800 flex items-center gap-1.5">
-            <i class="fa-solid fa-money-bill-transfer text-emerald-600"></i> Exchange Stars (⭐) for Cash ($)
-          </label>
-          <span class="text-[10px] bg-emerald-50 text-emerald-700 font-bold px-2 py-0.5 rounded-full border border-emerald-200">
-            1 ⭐ = $1.00
-          </span>
-        </div>
-        <div class="flex gap-2 items-center">
-          <div class="relative w-1/2">
-            <input id="exchangeStarInput" type="number" min="1" step="1" placeholder="Stars count" oninput="updateStarToDollarPreview()" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-400">
-            <span class="absolute right-3 top-2 text-xs text-amber-500">⭐</span>
-          </div>
-          <div class="w-1/2 bg-emerald-50 border border-emerald-200 rounded-xl px-3 py-2 text-xs font-bold text-emerald-700 text-center">
-            = <span id="cashValuePreview">$0.00</span>
-          </div>
-        </div>
-        <button onclick="exchangeStarsToCash()" class="w-full bg-emerald-500 hover:bg-emerald-600 active:scale-95 text-white text-xs font-bold py-2.5 rounded-xl transition flex items-center justify-center gap-1.5 shadow-sm">
-          <i class="fa-solid fa-check"></i> Confirm Cash Exchange ($)
-        </button>
-      </div>
-
-      <button onclick="resetData()" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-400 active:scale-95 text-[11px] py-1.5 rounded-xl font-medium transition mt-3">
-        Reset All Data
-      </button>
-    </div>
+    <!-- Reset Data Button -->
+    <button onclick="resetData()" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-400 active:scale-95 text-[11px] py-2 rounded-xl font-medium transition mt-3">
+      Reset All Data
+    </button>
 
   </div>
 
@@ -539,7 +538,7 @@
       }
     };
 
-    // Ô TRỪ BỚT SỬA SAI KHI LỠ CỘNG NHẦM
+    // Ô TRỪ SỬA SAI KHI LỠ CỘNG NHẦM
     window.minusMistake = async function() {
       const inputEl = document.getElementById("mistakeAmountInput");
       const amount = parseInt(inputEl.value);
@@ -565,7 +564,7 @@
       }
     };
 
-    // Rút tiền đô
+    // RÚT TIỀN ĐÔ
     window.updateDollarToStarPreview = function() {
       const dollars = parseFloat(document.getElementById("withdrawDollarInput").value);
       if (!isNaN(dollars) && dollars > 0) {
@@ -599,7 +598,7 @@
       }
     };
 
-    // Đổi sao ra tiền mặt
+    // ĐỔI SAO RA TIỀN MẶT
     window.updateStarToDollarPreview = function() {
       const stars = parseFloat(document.getElementById("exchangeStarInput").value);
       if (!isNaN(stars) && stars > 0) {
@@ -652,3 +651,4 @@
   </script>
 </body>
 </html>
+e
