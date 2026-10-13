@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Bé Tiết Kiệm - Gia Đình</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    @keyframes bounce-coin {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px) scale(1.05); }
+    }
+    .coin-pop {
+      animation: bounce-coin 0.4s ease-in-out;
+    }
+  </style>
+</head>
+<body class="bg-amber-50 min-h-screen text-slate-800 font-sans p-4 sm:p-6 pb-20">
+
+  <!-- Header -->
+  <div class="max-w-md mx-auto text-center mb-6">
+    <div class="inline-flex items-center gap-2 px-3 py-1 bg-amber-200 rounded-full text-amber-900 text-xs font-semibold uppercase tracking-wider mb-2">
+      <i class="fa-solid fa-piggy-bank"></i> Bé Học Quản Lý Tiền
+    </div>
+    <h1 class="text-2xl font-black text-amber-900 tracking-tight">Ngân Hàng Của Bé ⭐️</h1>
+    <p class="text-xs text-slate-500 mt-1">Đồng bộ tức thì giữa iPhone của ba mẹ & iPad của con</p>
+  </div>
+
+  <!-- Main Container -->
+  <div class="max-w-md mx-auto space-y-5">
+
+    <!-- 3 HŨ TIỀN TRỰC QUAN CHO BÉ -->
+    <div class="grid grid-cols-3 gap-3">
+      <!-- Hũ 1: Tiêu Ngay (50%) -->
+      <div class="bg-white rounded-2xl p-3 text-center border-2 border-emerald-200 shadow-sm relative overflow-hidden">
+        <div class="text-2xl mb-1">🍦</div>
+        <div class="text-xs font-bold text-slate-500">Tiêu Ngay</div>
+        <div id="spendCoins" class="text-xl font-black text-emerald-600 my-1">0</div>
+        <div class="text-[10px] text-slate-400">Đồ chơi / kẹo</div>
+      </div>
+
+      <!-- Hũ 2: Tiết Kiệm (40%) -->
+      <div class="bg-white rounded-2xl p-3 text-center border-2 border-blue-200 shadow-sm relative overflow-hidden">
+        <div class="text-2xl mb-1">🎁</div>
+        <div class="text-xs font-bold text-slate-500">Tiết Kiệm</div>
+        <div id="saveCoins" class="text-xl font-black text-blue-600 my-1">0</div>
+        <div class="text-[10px] text-slate-400">Mục tiêu lớn</div>
+      </div>
+
+      <!-- Hũ 3: Chia Sẻ (10%) -->
+      <div class="bg-white rounded-2xl p-3 text-center border-2 border-rose-200 shadow-sm relative overflow-hidden">
+        <div class="text-2xl mb-1">💖</div>
+        <div class="text-xs font-bold text-slate-500">Chia Sẻ</div>
+        <div id="giveCoins" class="text-xl font-black text-rose-600 my-1">0</div>
+        <div class="text-[10px] text-slate-400">Tặng bạn bè</div>
+      </div>
+    </div>
+
+    <!-- MỤC TIÊU CỦA BÉ -->
+    <div class="bg-white rounded-3xl p-5 border border-amber-200/80 shadow-md">
+      <div class="flex items-center justify-between mb-2">
+        <span class="text-xs font-bold uppercase tracking-wide text-slate-400">Món quà đang cố gắng mua</span>
+        <span class="text-xs font-bold text-amber-600" id="goalTarget">Mục tiêu: 20 ⭐</span>
+      </div>
+      <div class="flex items-center gap-3 mb-3">
+        <div class="w-12 h-12 bg-amber-100 rounded-2xl flex items-center justify-center text-2xl shadow-inner">
+          🚀
+        </div>
+        <div>
+          <h3 class="font-bold text-slate-800 text-base">Bộ Lego Không Gian</h3>
+          <p class="text-xs text-slate-500">Bé đã dành được <span id="currentSave" class="font-bold text-blue-600">0</span> / 20 ⭐</p>
+        </div>
+      </div>
+      <!-- Progress Bar -->
+      <div class="w-full bg-slate-100 h-3.5 rounded-full overflow-hidden p-0.5 border border-slate-200">
+        <div id="goalProgressBar" class="bg-gradient-to-r from-blue-400 to-indigo-500 h-full rounded-full transition-all duration-500" style="width: 0%"></div>
+      </div>
+    </div>
+
+    <!-- PHẦN DÀNH CHO BA MẸ: DUYỆT VIỆC TỐT -->
+    <div class="bg-white rounded-3xl p-5 border border-slate-200 shadow-sm space-y-4">
+      <div class="flex items-center justify-between border-b pb-2">
+        <h3 class="font-bold text-slate-700 text-sm flex items-center gap-2">
+          <i class="fa-solid fa-list-check text-indigo-500"></i> Việc Tốt Của Bé
+        </h3>
+        <span class="text-[10px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded-full font-medium">Khu vực Ba Mẹ</span>
+      </div>
+
+      <!-- Nhiệm vụ mẫu -->
+      <div class="space-y-2.5">
+        <div class="flex items-center justify-between p-2.5 bg-slate-50 rounded-xl hover:bg-slate-100 transition">
+          <div class="flex items-center gap-2.5">
+            <span class="text-lg">🧸</span>
+            <div>
+              <p class="text-xs font-bold text-slate-800">Dọn dẹp đồ chơi sau khi chơi</p>
+              <p class="text-[10px] text-emerald-600 font-semibold">+2 Ngôi sao</p>
+            </div>
+          </div>
+          <button onclick="rewardKid(2, 'Dọn dẹp đồ chơi')" class="bg-emerald-500 active:scale-95 hover:bg-emerald-600 text-white text-xs font-bold px-3 py-1.5 rounded-lg shadow-sm transition">
+            Duyệt (+2)
+          </button>
+        </div>
+
+        <div class="flex items-center justify-between p-2.5 bg-slate-50 rounded-xl hover:bg-slate-100 transition">
+          <div class="flex items-center gap-2.5">
+            <span class="text-lg">🪥</span>
+            <div>
+              <p class="text-xs font-bold text-slate-800">Tự giác đánh răng buổi tối</p>
+              <p class="text-[10px] text-emerald-600 font-semibold">+1 Ngôi sao</p>
+            </div>
+          </div>
+          <button onclick="rewardKid(1, 'Đánh răng ngoan')" class="bg-emerald-500 active:scale-95 hover:bg-emerald-600 text-white text-xs font-bold px-3 py-1.5 rounded-lg shadow-sm transition">
+            Duyệt (+1)
+          </button>
+        </div>
+
+        <div class="flex items-center justify-between p-2.5 bg-slate-50 rounded-xl hover:bg-slate-100 transition">
+          <div class="flex items-center gap-2.5">
+            <span class="text-lg">🥦</span>
+            <div>
+              <p class="text-xs font-bold text-slate-800">Ăn hết phần rau trong bữa ăn</p>
+              <p class="text-[10px] text-emerald-600 font-semibold">+1 Ngôi sao</p>
+            </div>
+          </div>
+          <button onclick="rewardKid(1, 'Ăn hết rau')" class="bg-emerald-500 active:scale-95 hover:bg-emerald-600 text-white text-xs font-bold px-3 py-1.5 rounded-lg shadow-sm transition">
+            Duyệt (+1)
+          </button>
+        </div>
+      </div>
+
+      <!-- Đổi quà / Chi tiêu -->
+      <div class="pt-2 border-t flex gap-2">
+        <button onclick="spendFromPot('spend', 2)" class="flex-1 bg-amber-100 active:scale-95 hover:bg-amber-200 text-amber-900 text-xs font-bold py-2 rounded-xl transition">
+          Trừ 2⭐ (Ăn kem)
+        </button>
+        <button onclick="resetData()" class="px-3 bg-slate-100 hover:bg-slate-200 text-slate-500 text-xs rounded-xl font-medium transition">
+          Reset
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- SCRIPT KẾT NỐI FIREBASE FIRESTORE -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+    import { getFirestore, doc, onSnapshot, setDoc, updateDoc, increment } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+
+    // Cấu hình Firebase
+    const firebaseConfig = {
+      apiKey: "AIzaSyAywa4F-dWn001_6o-ImMd-dQdsE5OMfnI",
+      authDomain: "saving-money-for-my-kid.firebaseapp.com",
+      projectId: "saving-money-for-my-kid",
+      storageBucket: "saving-money-for-my-kid.firebasestorage.app",
+      messagingSenderId: "201005560393",
+      appId: "1:201005560393:web:434eff02f838594d480598"
+    };
+
+    // Khởi tạo Firebase
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    const familyWalletRef = doc(db, "family_wallets", "my_kid_wallet");
+
+    function playCoinSound() {
+      try {
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(880, audioCtx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(1760, audioCtx.currentTime + 0.15);
+        gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.3);
+      } catch (e) {
+        console.log("Audio waiting for user interaction");
+      }
+    }
+
+    let isFirstLoad = true;
+    onSnapshot(familyWalletRef, (snap) => {
+      if (snap.exists()) {
+        const data = snap.data();
+        const spend = data.spend || 0;
+        const save = data.save || 0;
+        const give = data.give || 0;
+        const goal = data.goalTarget || 20;
+
+        document.getElementById("spendCoins").innerText = spend;
+        document.getElementById("saveCoins").innerText = save;
+        document.getElementById("giveCoins").innerText = give;
+        document.getElementById("currentSave").innerText = save;
+
+        const percent = Math.min(Math.round((save / goal) * 100), 100);
+        document.getElementById("goalProgressBar").style.width = percent + "%";
+
+        if (!isFirstLoad) {
+          playCoinSound();
+          document.getElementById("saveCoins").classList.add("coin-pop");
+          setTimeout(() => document.getElementById("saveCoins").classList.remove("coin-pop"), 400);
+        }
+        isFirstLoad = false;
+      } else {
+        setDoc(familyWalletRef, {
+          spend: 0,
+          save: 0,
+          give: 0,
+          goalTarget: 20
+        });
+      }
+    });
+
+    window.rewardKid = async function(stars, taskName) {
+      const spendPart = Math.ceil(stars * 0.5);
+      const savePart = stars - spendPart;
+
+      await updateDoc(familyWalletRef, {
+        spend: increment(spendPart),
+        save: increment(savePart)
+      });
+    };
+
+    window.spendFromPot = async function(potType, amount) {
+      const current = parseInt(document.getElementById(potType + "Coins").innerText);
+      if (current >= amount) {
+        await updateDoc(familyWalletRef, {
+          [potType]: increment(-amount)
+        });
+      } else {
+        alert("Bé chưa đủ sao trong hũ này rồi!");
+      }
+    };
+
+    window.resetData = async function() {
+      if (confirm("Bạn có chắc muốn đặt lại tất cả hũ về 0?")) {
+        await setDoc(familyWalletRef, {
+          spend: 0,
+          save: 0,
+          give: 0,
+          goalTarget: 20
+        });
+      }
+    };
+  </script>
+</body>
+</html>
+
