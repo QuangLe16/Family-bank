@@ -19,7 +19,7 @@
     }
   </style>
 </head>
-<body class="bg-[#FFFDF5] min-h-screen text-slate-800 font-sans p-4 sm:p-6 pb-28">
+<body class="bg-[#FFFDF5] min-h-screen text-slate-800 font-sans p-4 sm:p-6 pb-36">
 
   <!-- Header -->
   <div class="max-w-md mx-auto text-center mb-5">
@@ -84,10 +84,10 @@
       </div>
     </div>
 
-    <!-- 3. KHU VỰC RÚT TIỀN, ĐỔI SAO & TRỪ SỬA SAI (ĐÃ CHUYỂN LÊN DƯỚI TOTAL EARNINGS) -->
+    <!-- 3. RÚT TIỀN, ĐỔI SAO & SỬA SAI (NGAY DƯỚI TOTAL EARNINGS) -->
     <div class="bg-white rounded-3xl p-5 border border-slate-200 shadow-sm space-y-4">
       
-      <!-- Ô 1: RÚT TIỀN ĐÔ ($) TỪ SAVE JAR -->
+      <!-- Ô 1: RÚT TIỀN ĐÔ ($) -->
       <div class="space-y-2 pb-3 border-b border-slate-100">
         <label class="text-xs font-bold text-slate-800 flex items-center justify-between">
           <span class="flex items-center gap-1.5"><i class="fa-solid fa-dollar-sign text-blue-600"></i> Withdraw Cash ($) from Save</span>
@@ -107,7 +107,7 @@
         </button>
       </div>
 
-      <!-- Ô 2: ĐỔI TỪ SAO (⭐) RA TIỀN MẶT ($) -->
+      <!-- Ô 2: ĐỔI SAO RA TIỀN MẶT ($) -->
       <div class="space-y-2 pb-3 border-b border-slate-100">
         <div class="flex items-center justify-between">
           <label class="text-xs font-bold text-slate-800 flex items-center gap-1.5">
@@ -126,12 +126,12 @@
             = <span id="cashValuePreview">$0.00</span>
           </div>
         </div>
-        <button onclick="exchangeStarsToCash()" class="w-full bg-emerald-500 hover:bg-emerald-600 active:scale-95 text-white text-xs font-bold py-2.5 rounded-xl transition flex items-center justify-center gap-1.5 shadow-sm">
+        <button onclick="exchangeStarsToCash()" class="w-full bg-emerald-500 hover:bg-emerald-600 active:scale-95 text-white text-xs font-bold py-2.5 rounded-xl transition flex items-center justify-center gap-1 shadow-sm">
           <i class="fa-solid fa-check"></i> Confirm Cash Exchange ($)
         </button>
       </div>
 
-      <!-- Ô 3: TRỪ SỬA SAI KHI LỠ CỘNG NHẦM -->
+      <!-- Ô 3: TRỪ SỬA SAI KHI CỘNG NHẦM -->
       <div class="space-y-2">
         <div class="flex items-center justify-between">
           <label class="text-xs font-bold text-rose-800 flex items-center gap-1.5">
@@ -196,119 +196,70 @@
       </div>
     </div>
 
-    <!-- 5. MAIN HOUSEWORK (CÔNG VIỆC TRẢ TIỀN MẶT $1 & 1⭐) -->
+    <!-- 5. MAIN HOUSEWORK (CÓ NÚT + ADD TASK RÕ RÀNG) -->
     <div class="bg-white rounded-3xl p-5 border border-slate-200 shadow-sm space-y-3">
       <div class="flex items-center justify-between border-b pb-2">
-        <h3 class="font-bold text-slate-800 text-sm flex items-center gap-2">
-          <i class="fa-solid fa-broom text-amber-500"></i> Housework
-        </h3>
-        <span class="text-[10px] bg-emerald-100 text-emerald-800 px-2.5 py-0.5 rounded-full font-bold uppercase tracking-wider">Cash Tasks ($1 & 1⭐)</span>
+        <div>
+          <h3 class="font-bold text-slate-800 text-sm flex items-center gap-1.5">
+            <i class="fa-solid fa-broom text-amber-500"></i> Housework
+          </h3>
+          <span class="text-[10px] text-emerald-600 font-bold">$1.00 & +1 Star</span>
+        </div>
+        
+        <!-- NÚT BẤM THÊM VIỆC HOUSEWORK -->
+        <button onclick="toggleAddTaskForm('housework')" class="bg-emerald-600 active:scale-95 hover:bg-emerald-700 text-white text-xs font-bold px-3 py-1.5 rounded-xl transition flex items-center gap-1 shadow-sm">
+          <i class="fa-solid fa-plus text-[10px]"></i> Add Task
+        </button>
       </div>
 
-      <div class="space-y-2">
-        <div class="flex items-center justify-between p-2.5 bg-slate-50 rounded-xl hover:bg-slate-100 transition">
-          <div class="flex items-center gap-2.5">
-            <span class="text-lg">🧹</span>
-            <div>
-              <p class="text-xs font-bold text-slate-800">Sweep the floor</p>
-              <p class="text-[10px] text-emerald-600 font-semibold">+$1.00 & +1 Star</p>
-            </div>
-          </div>
-          <button onclick="rewardKid(1, 'Sweep floor')" class="bg-emerald-500 active:scale-95 hover:bg-emerald-600 text-white text-xs font-bold px-3 py-1.5 rounded-lg shadow-sm transition">
-            Approve ($1)
-          </button>
+      <!-- Khung nhập thêm việc mới của Housework -->
+      <div id="addHouseworkForm" class="hidden bg-emerald-50/70 border border-emerald-200 rounded-2xl p-3 space-y-2">
+        <div class="text-[11px] font-bold text-emerald-950 uppercase tracking-wide">New Housework Task</div>
+        <div class="grid grid-cols-4 gap-2">
+          <input id="newHouseworkEmoji" type="text" placeholder="🧹" class="col-span-1 bg-white border border-emerald-300 rounded-xl px-2 py-1.5 text-center text-base focus:outline-none">
+          <input id="newHouseworkTitle" type="text" placeholder="Task name (e.g. Wash dishes)" class="col-span-3 bg-white border border-emerald-300 rounded-xl px-3 py-1.5 text-xs font-medium focus:outline-none">
         </div>
-
-        <div class="flex items-center justify-between p-2.5 bg-slate-50 rounded-xl hover:bg-slate-100 transition">
-          <div class="flex items-center gap-2.5">
-            <span class="text-lg">🪣</span>
-            <div>
-              <p class="text-xs font-bold text-slate-800">Mop the floor</p>
-              <p class="text-[10px] text-emerald-600 font-semibold">+$1.00 & +1 Star</p>
-            </div>
-          </div>
-          <button onclick="rewardKid(1, 'Mop floor')" class="bg-emerald-500 active:scale-95 hover:bg-emerald-600 text-white text-xs font-bold px-3 py-1.5 rounded-lg shadow-sm transition">
-            Approve ($1)
-          </button>
-        </div>
-
-        <div class="flex items-center justify-between p-2.5 bg-slate-50 rounded-xl hover:bg-slate-100 transition">
-          <div class="flex items-center gap-2.5">
-            <span class="text-lg">🙌</span>
-            <div>
-              <p class="text-xs font-bold text-slate-800">Scratch dad's back</p>
-              <p class="text-[10px] text-emerald-600 font-semibold">+$1.00 & +1 Star</p>
-            </div>
-          </div>
-          <button onclick="rewardKid(1, 'Scratch dad back')" class="bg-emerald-500 active:scale-95 hover:bg-emerald-600 text-white text-xs font-bold px-3 py-1.5 rounded-lg shadow-sm transition">
-            Approve ($1)
-          </button>
-        </div>
-
-        <div class="flex items-center justify-between p-2.5 bg-slate-50 rounded-xl hover:bg-slate-100 transition">
-          <div class="flex items-center gap-2.5">
-            <span class="text-lg">💆‍♂️</span>
-            <div>
-              <p class="text-xs font-bold text-slate-800">Massage parents' backs</p>
-              <p class="text-[10px] text-emerald-600 font-semibold">+$1.00 & +1 Star</p>
-            </div>
-          </div>
-          <button onclick="rewardKid(1, 'Massage backs')" class="bg-emerald-500 active:scale-95 hover:bg-emerald-600 text-white text-xs font-bold px-3 py-1.5 rounded-lg shadow-sm transition">
-            Approve ($1)
-          </button>
+        <div class="flex gap-2 justify-end pt-1">
+          <button onclick="toggleAddTaskForm('housework')" class="px-3 bg-slate-200 text-slate-600 text-xs font-semibold py-1 rounded-xl">Cancel</button>
+          <button onclick="addNewTask('housework')" class="px-4 bg-emerald-600 text-white text-xs font-bold py-1 rounded-xl shadow-sm">Save Task</button>
         </div>
       </div>
+
+      <!-- Danh sách động của Housework -->
+      <div id="houseworkListContainer" class="space-y-2"></div>
     </div>
 
-    <!-- 6. DAILY HABITS (CÔNG VIỆC PHỤ THƯỞNG 1 SAO) -->
+    <!-- 6. DAILY HABITS (CÓ NÚT + ADD TASK RÕ RÀNG) -->
     <div class="bg-white rounded-3xl p-5 border border-slate-200 shadow-sm space-y-3">
       <div class="flex items-center justify-between border-b pb-2">
-        <h3 class="font-bold text-slate-700 text-sm flex items-center gap-2">
-          <i class="fa-solid fa-star text-indigo-500"></i> Daily Habits
-        </h3>
-        <span class="text-[10px] bg-slate-100 text-slate-500 px-2.5 py-0.5 rounded-full font-bold uppercase tracking-wider">Support Tasks (+1 ⭐)</span>
+        <div>
+          <h3 class="font-bold text-slate-700 text-sm flex items-center gap-1.5">
+            <i class="fa-solid fa-star text-indigo-500"></i> Daily Habits
+          </h3>
+          <span class="text-[10px] text-blue-600 font-bold">+1 Star</span>
+        </div>
+
+        <!-- NÚT BẤM THÊM VIỆC DAILY HABITS -->
+        <button onclick="toggleAddTaskForm('habit')" class="bg-indigo-600 active:scale-95 hover:bg-indigo-700 text-white text-xs font-bold px-3 py-1.5 rounded-xl transition flex items-center gap-1 shadow-sm">
+          <i class="fa-solid fa-plus text-[10px]"></i> Add Task
+        </button>
       </div>
 
-      <div class="space-y-2">
-        <div class="flex items-center justify-between p-2.5 bg-slate-50 rounded-xl hover:bg-slate-100 transition">
-          <div class="flex items-center gap-2.5">
-            <span class="text-lg">🧸</span>
-            <div>
-              <p class="text-xs font-bold text-slate-800">Clean up toys after playing</p>
-              <p class="text-[10px] text-blue-600 font-semibold">+1 Star</p>
-            </div>
-          </div>
-          <button onclick="rewardKid(1, 'Clean toys')" class="bg-blue-500 active:scale-95 hover:bg-blue-600 text-white text-xs font-bold px-3 py-1.5 rounded-lg shadow-sm transition">
-            Approve (+1⭐)
-          </button>
+      <!-- Khung nhập thêm việc mới của Habits -->
+      <div id="addHabitForm" class="hidden bg-indigo-50/70 border border-indigo-200 rounded-2xl p-3 space-y-2">
+        <div class="text-[11px] font-bold text-indigo-950 uppercase tracking-wide">New Daily Habit</div>
+        <div class="grid grid-cols-4 gap-2">
+          <input id="newHabitEmoji" type="text" placeholder="⭐️" class="col-span-1 bg-white border border-indigo-300 rounded-xl px-2 py-1.5 text-center text-base focus:outline-none">
+          <input id="newHabitTitle" type="text" placeholder="Habit name (e.g. Read books)" class="col-span-3 bg-white border border-indigo-300 rounded-xl px-3 py-1.5 text-xs font-medium focus:outline-none">
         </div>
-
-        <div class="flex items-center justify-between p-2.5 bg-slate-50 rounded-xl hover:bg-slate-100 transition">
-          <div class="flex items-center gap-2.5">
-            <span class="text-lg">🪥</span>
-            <div>
-              <p class="text-xs font-bold text-slate-800">Brush teeth before bedtime</p>
-              <p class="text-[10px] text-blue-600 font-semibold">+1 Star</p>
-            </div>
-          </div>
-          <button onclick="rewardKid(1, 'Brush teeth')" class="bg-blue-500 active:scale-95 hover:bg-blue-600 text-white text-xs font-bold px-3 py-1.5 rounded-lg shadow-sm transition">
-            Approve (+1⭐)
-          </button>
-        </div>
-
-        <div class="flex items-center justify-between p-2.5 bg-slate-50 rounded-xl hover:bg-slate-100 transition">
-          <div class="flex items-center gap-2.5">
-            <span class="text-lg">🥦</span>
-            <div>
-              <p class="text-xs font-bold text-slate-800">Eat all vegetables</p>
-              <p class="text-[10px] text-blue-600 font-semibold">+1 Star</p>
-            </div>
-          </div>
-          <button onclick="rewardKid(1, 'Eat vegetables')" class="bg-blue-500 active:scale-95 hover:bg-blue-600 text-white text-xs font-bold px-3 py-1.5 rounded-lg shadow-sm transition">
-            Approve (+1⭐)
-          </button>
+        <div class="flex gap-2 justify-end pt-1">
+          <button onclick="toggleAddTaskForm('habit')" class="px-3 bg-slate-200 text-slate-600 text-xs font-semibold py-1 rounded-xl">Cancel</button>
+          <button onclick="addNewTask('habit')" class="px-4 bg-indigo-600 text-white text-xs font-bold py-1 rounded-xl shadow-sm">Save Task</button>
         </div>
       </div>
+
+      <!-- Danh sách động của Daily Habits -->
+      <div id="habitsListContainer" class="space-y-2"></div>
     </div>
 
     <!-- 7. KHU VỰC TIP TIỀN MẶT BẰNG $ -->
@@ -381,6 +332,22 @@
     document.getElementById("yearNameLabel").innerText = currentYear;
     document.getElementById("currentDateLabel").innerText = `${monthNames[now.getMonth()]} ${now.getDate()}, ${currentYear}`;
 
+    const defaultHousework = [
+      { id: "hw_1", title: "Sweep the floor", emoji: "🧹" },
+      { id: "hw_2", title: "Mop the floor", emoji: "🪣" },
+      { id: "hw_3", title: "Scratch dad's back", emoji: "🙌" },
+      { id: "hw_4", title: "Massage parents' backs", emoji: "💆‍♂️" }
+    ];
+
+    const defaultHabits = [
+      { id: "hb_1", title: "Clean up toys after playing", emoji: "🧸" },
+      { id: "hb_2", title: "Brush teeth before bedtime", emoji: "🪥" },
+      { id: "hb_3", title: "Eat all vegetables", emoji: "🥦" }
+    ];
+
+    let currentHouseworkList = [];
+    let currentHabitsList = [];
+
     function playCoinSound() {
       try {
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -398,6 +365,58 @@
       } catch (e) {
         console.log("Audio waiting for user touch");
       }
+    }
+
+    function renderTasks() {
+      const hwContainer = document.getElementById("houseworkListContainer");
+      hwContainer.innerHTML = "";
+      currentHouseworkList.forEach(task => {
+        const item = document.createElement("div");
+        item.className = "flex items-center justify-between p-2.5 bg-slate-50 rounded-xl hover:bg-slate-100 transition";
+        item.innerHTML = `
+          <div class="flex items-center gap-2.5">
+            <span class="text-lg">${task.emoji || "🧹"}</span>
+            <div>
+              <p class="text-xs font-bold text-slate-800">${task.title}</p>
+              <p class="text-[10px] text-emerald-600 font-semibold">+$1.00 & +1 Star</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-1.5">
+            <button onclick="rewardKid(1, '${task.title}')" class="bg-emerald-500 active:scale-95 hover:bg-emerald-600 text-white text-xs font-bold px-3 py-1.5 rounded-lg shadow-sm transition">
+              Approve ($1)
+            </button>
+            <button onclick="deleteTask('housework', '${task.id}')" class="text-slate-300 hover:text-rose-500 p-1.5 text-xs transition">
+              <i class="fa-solid fa-trash-can"></i>
+            </button>
+          </div>
+        `;
+        hwContainer.appendChild(item);
+      });
+
+      const hbContainer = document.getElementById("habitsListContainer");
+      hbContainer.innerHTML = "";
+      currentHabitsList.forEach(task => {
+        const item = document.createElement("div");
+        item.className = "flex items-center justify-between p-2.5 bg-slate-50 rounded-xl hover:bg-slate-100 transition";
+        item.innerHTML = `
+          <div class="flex items-center gap-2.5">
+            <span class="text-lg">${task.emoji || "⭐️"}</span>
+            <div>
+              <p class="text-xs font-bold text-slate-800">${task.title}</p>
+              <p class="text-[10px] text-blue-600 font-semibold">+1 Star</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-1.5">
+            <button onclick="rewardKid(1, '${task.title}')" class="bg-blue-500 active:scale-95 hover:bg-blue-600 text-white text-xs font-bold px-3 py-1.5 rounded-lg shadow-sm transition">
+              Approve (+1⭐)
+            </button>
+            <button onclick="deleteTask('habit', '${task.id}')" class="text-slate-300 hover:text-rose-500 p-1.5 text-xs transition">
+              <i class="fa-solid fa-trash-can"></i>
+            </button>
+          </div>
+        `;
+        hbContainer.appendChild(item);
+      });
     }
 
     let isFirstLoad = true;
@@ -426,6 +445,10 @@
         const goalEmoji = data.goalEmoji || "🚀";
         const monthEarned = data.earnedThisMonth || 0;
         const yearEarned = data.earnedThisYear || 0;
+
+        currentHouseworkList = data.houseworkTasks || defaultHousework;
+        currentHabitsList = data.habitTasks || defaultHabits;
+        renderTasks();
 
         document.getElementById("spendCoins").innerText = spend;
         document.getElementById("saveCoins").innerText = save;
@@ -463,10 +486,53 @@
           earnedThisMonth: 0,
           earnedThisYear: 0,
           activeMonthKey: currentMonthKey,
-          activeYearKey: currentYearKey
+          activeYearKey: currentYearKey,
+          houseworkTasks: defaultHousework,
+          habitTasks: defaultHabits
         });
       }
     });
+
+    window.toggleAddTaskForm = function(type) {
+      const form = document.getElementById(type === 'housework' ? "addHouseworkForm" : "addHabitForm");
+      form.classList.toggle("hidden");
+    };
+
+    window.addNewTask = async function(type) {
+      if (type === 'housework') {
+        const title = document.getElementById("newHouseworkTitle").value.trim();
+        const emoji = document.getElementById("newHouseworkEmoji").value.trim() || "🧹";
+        if (!title) { alert("Please enter task name!"); return; }
+
+        const newTask = { id: "hw_" + Date.now(), title, emoji };
+        const updated = [...currentHouseworkList, newTask];
+        await updateDoc(walletRef, { houseworkTasks: updated });
+        document.getElementById("newHouseworkTitle").value = "";
+        document.getElementById("addHouseworkForm").classList.add("hidden");
+      } else {
+        const title = document.getElementById("newHabitTitle").value.trim();
+        const emoji = document.getElementById("newHabitEmoji").value.trim() || "⭐️";
+        if (!title) { alert("Please enter habit name!"); return; }
+
+        const newTask = { id: "hb_" + Date.now(), title, emoji };
+        const updated = [...currentHabitsList, newTask];
+        await updateDoc(walletRef, { habitTasks: updated });
+        document.getElementById("newHabitTitle").value = "";
+        document.getElementById("addHabitForm").classList.add("hidden");
+      }
+    };
+
+    window.deleteTask = async function(type, id) {
+      if (confirm("Are you sure you want to remove this task?")) {
+        if (type === 'housework') {
+          const updated = currentHouseworkList.filter(t => t.id !== id);
+          await updateDoc(walletRef, { houseworkTasks: updated });
+        } else {
+          const updated = currentHabitsList.filter(t => t.id !== id);
+          await updateDoc(walletRef, { habitTasks: updated });
+        }
+      }
+    };
 
     window.toggleGoalEdit = function() {
       const form = document.getElementById("goalEditForm");
@@ -499,7 +565,6 @@
       document.getElementById("goalEditForm").classList.add("hidden");
     };
 
-    // Duyệt thưởng việc làm (+1⭐ & +$1)
     window.rewardKid = async function(stars, taskName) {
       await updateDoc(walletRef, {
         save: increment(stars),
@@ -508,7 +573,6 @@
       });
     };
 
-    // Tip tiền mặt
     window.quickTip = async function(dollars) {
       if (confirm(`Tip $${dollars.toFixed(2)} to Chau? (+${dollars} Stars)`)) {
         await updateDoc(walletRef, {
@@ -538,7 +602,6 @@
       }
     };
 
-    // Ô TRỪ SỬA SAI KHI LỠ CỘNG NHẦM
     window.minusMistake = async function() {
       const inputEl = document.getElementById("mistakeAmountInput");
       const amount = parseInt(inputEl.value);
@@ -564,7 +627,6 @@
       }
     };
 
-    // RÚT TIỀN ĐÔ
     window.updateDollarToStarPreview = function() {
       const dollars = parseFloat(document.getElementById("withdrawDollarInput").value);
       if (!isNaN(dollars) && dollars > 0) {
@@ -598,7 +660,6 @@
       }
     };
 
-    // ĐỔI SAO RA TIỀN MẶT
     window.updateStarToDollarPreview = function() {
       const stars = parseFloat(document.getElementById("exchangeStarInput").value);
       if (!isNaN(stars) && stars > 0) {
@@ -644,11 +705,12 @@
           earnedThisMonth: 0,
           earnedThisYear: 0,
           activeMonthKey: currentMonthKey,
-          activeYearKey: currentYearKey
+          activeYearKey: currentYearKey,
+          houseworkTasks: defaultHousework,
+          habitTasks: defaultHabits
         });
       }
     };
   </script>
 </body>
 </html>
-e
