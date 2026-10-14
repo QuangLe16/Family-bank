@@ -19,7 +19,7 @@
     }
   </style>
 </head>
-<body class="bg-[#FFFDF5] min-h-screen text-slate-800 font-sans p-4 sm:p-6 pb-28">
+<body class="bg-[#FFFDF5] min-h-screen text-slate-800 font-sans p-4 sm:p-6 pb-36">
 
   <!-- Header -->
   <div class="max-w-md mx-auto text-center mb-5">
@@ -50,7 +50,7 @@
         <div class="text-2xl mb-1">🎁</div>
         <div class="text-xs font-bold text-blue-700 uppercase tracking-tight">Save</div>
         <div class="text-xl font-black text-blue-600 my-1"><span id="saveCoins">0</span> ⭐</div>
-        <div class="text-[10px] text-slate-400">Goals & Cash ($)</div>
+        <div class="text-[10px] text-slate-400">Goals & Cash (<span id="saveDollarsPreview">$0.00</span>)</div>
       </div>
 
       <!-- Jar 3: Share -->
@@ -84,19 +84,19 @@
       </div>
     </div>
 
-    <!-- 3. KHU VỰC RÚT TIỀN, ĐỔI SAO & TRỪ SỬA SAI (NẰM DƯỚI TOTAL EARNINGS) -->
+    <!-- 3. RÚT TIỀN, ĐỔI SAO & SỬA SAI (NGAY DƯỚI TOTAL EARNINGS) -->
     <div class="bg-white rounded-3xl p-5 border border-slate-200 shadow-sm space-y-4">
       
-      <!-- Ô 1: RÚT TIỀN ĐÔ ($) TỪ SAVE JAR -->
+      <!-- Ô 1: RÚT TIỀN ĐÔ ($) TỪ HŨ SAVE -->
       <div class="space-y-2 pb-3 border-b border-slate-100">
         <label class="text-xs font-bold text-slate-800 flex items-center justify-between">
           <span class="flex items-center gap-1.5"><i class="fa-solid fa-dollar-sign text-blue-600"></i> Withdraw Cash ($) from Save</span>
-          <span class="text-[10px] bg-blue-50 text-blue-700 font-bold px-2 py-0.5 rounded-md">$1 = 1 ⭐</span>
+          <span class="text-[10px] bg-blue-50 text-blue-700 font-bold px-2 py-0.5 rounded-md">$1.00 = 5 ⭐</span>
         </label>
         <div class="flex gap-2 items-center">
           <div class="relative w-1/2">
             <span class="absolute left-3 top-2 text-xs font-bold text-slate-400">$</span>
-            <input id="withdrawDollarInput" type="number" min="1" step="1" placeholder="0.00" oninput="updateDollarToStarPreview()" class="w-full bg-slate-50 border border-slate-200 rounded-xl pl-6 pr-3 py-2 text-xs font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-400">
+            <input id="withdrawDollarInput" type="number" min="0.2" step="0.2" placeholder="0.00" oninput="updateDollarToStarPreview()" class="w-full bg-slate-50 border border-slate-200 rounded-xl pl-6 pr-3 py-2 text-xs font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-400">
           </div>
           <div class="w-1/2 bg-blue-50 border border-blue-200 rounded-xl px-3 py-2 text-xs font-bold text-blue-700 text-center">
             = <span id="starCostPreview">0 ⭐</span>
@@ -107,14 +107,14 @@
         </button>
       </div>
 
-      <!-- Ô 2: ĐỔI TỪ SAO (⭐) RA TIỀN MẶT ($) -->
+      <!-- Ô 2: ĐỔI SAO (⭐) TỪ HABITS THÀNH TIỀN MẶT ($) -->
       <div class="space-y-2 pb-3 border-b border-slate-100">
         <div class="flex items-center justify-between">
           <label class="text-xs font-bold text-slate-800 flex items-center gap-1.5">
             <i class="fa-solid fa-money-bill-transfer text-emerald-600"></i> Exchange Stars (⭐) for Cash ($)
           </label>
           <span class="text-[10px] bg-emerald-50 text-emerald-700 font-bold px-2 py-0.5 rounded-full border border-emerald-200">
-            1 ⭐ = $1.00
+            5 ⭐ = $1.00
           </span>
         </div>
         <div class="flex gap-2 items-center">
@@ -131,7 +131,7 @@
         </button>
       </div>
 
-      <!-- Ô 3: TRỪ SỬA SAI KHI LỠ CỘNG NHẦM -->
+      <!-- Ô 3: TRỪ SỬA SAI KHI CỘNG NHẦM -->
       <div class="space-y-2">
         <div class="flex items-center justify-between">
           <label class="text-xs font-bold text-rose-800 flex items-center gap-1.5">
@@ -143,7 +143,7 @@
         </div>
         <div class="flex gap-2 items-center">
           <div class="relative w-2/3">
-            <input id="mistakeAmountInput" type="number" min="1" step="1" placeholder="Amount ($ or ⭐)" class="w-full bg-rose-50/50 border border-rose-200 rounded-xl px-3 py-2 text-xs font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-rose-400">
+            <input id="mistakeAmountInput" type="number" min="1" step="1" placeholder="Stars (⭐) to deduct" class="w-full bg-rose-50/50 border border-rose-200 rounded-xl px-3 py-2 text-xs font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-rose-400">
           </div>
           <button onclick="minusMistake()" class="w-1/3 bg-rose-500 hover:bg-rose-600 active:scale-95 text-white text-xs font-bold py-2 rounded-xl transition flex items-center justify-center gap-1 shadow-sm">
             <i class="fa-solid fa-minus"></i> Correct
@@ -171,7 +171,7 @@
         </div>
         <div>
           <h3 id="goalTitleDisplay" class="font-bold text-slate-800 text-sm sm:text-base">Space Lego Set</h3>
-          <p class="text-xs text-slate-500">Saved: <span id="currentSave" class="font-bold text-blue-600">0</span> / <span id="currentGoalMax">20</span> ⭐ (<span id="goalDollarsText">$20.00</span>)</p>
+          <p class="text-xs text-slate-500">Saved: <span id="currentSave" class="font-bold text-blue-600">0</span> / <span id="currentGoalMax">20</span> ⭐ (<span id="goalDollarsText">$4.00</span>)</p>
         </div>
       </div>
 
@@ -196,70 +196,68 @@
       </div>
     </div>
 
-    <!-- 5. MAIN HOUSEWORK (CÓ NÚT THÊM VIỆC TRỰC TIẾP) -->
+    <!-- 5. MAIN HOUSEWORK (CHỈ CÓ $1.00 TIỀN MẶT - KHÔNG CÓ SAO) -->
     <div class="bg-white rounded-3xl p-5 border border-slate-200 shadow-sm space-y-3">
       <div class="flex items-center justify-between border-b pb-2">
-        <h3 class="font-bold text-slate-800 text-sm flex items-center gap-2">
-          <i class="fa-solid fa-broom text-amber-500"></i> Housework
-        </h3>
-        <div class="flex items-center gap-2">
-          <span class="text-[10px] bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full font-bold uppercase tracking-wider">$1 & 1⭐</span>
-          <button onclick="toggleAddTaskForm('housework')" class="text-[11px] bg-emerald-500 hover:bg-emerald-600 text-white px-2 py-0.5 rounded-lg font-bold transition flex items-center gap-1 shadow-sm">
-            <i class="fa-solid fa-plus text-[9px]"></i> Add Task
-          </button>
+        <div>
+          <h3 class="font-bold text-slate-800 text-sm flex items-center gap-1.5">
+            <i class="fa-solid fa-broom text-amber-500"></i> Housework
+          </h3>
+          <span class="text-[10px] text-emerald-600 font-bold">Reward: $1.00 Cash</span>
         </div>
+        
+        <button onclick="toggleAddTaskForm('housework')" class="bg-emerald-600 active:scale-95 hover:bg-emerald-700 text-white text-xs font-bold px-3 py-1.5 rounded-xl transition flex items-center gap-1 shadow-sm">
+          <i class="fa-solid fa-plus text-[10px]"></i> Add Task
+        </button>
       </div>
 
-      <!-- Form thêm Housework (Ẩn/Hiện) -->
-      <div id="addHouseworkForm" class="hidden bg-emerald-50/60 border border-emerald-200 rounded-2xl p-3 space-y-2">
-        <div class="text-[11px] font-bold text-emerald-900 uppercase">Add New Housework Task</div>
+      <!-- Khung nhập thêm việc mới của Housework -->
+      <div id="addHouseworkForm" class="hidden bg-emerald-50/70 border border-emerald-200 rounded-2xl p-3 space-y-2">
+        <div class="text-[11px] font-bold text-emerald-950 uppercase tracking-wide">New Housework Task ($1.00)</div>
         <div class="grid grid-cols-4 gap-2">
-          <input id="newHouseworkEmoji" type="text" placeholder="🧹" class="col-span-1 bg-white border border-emerald-200 rounded-xl px-2 py-1.5 text-center text-sm font-bold focus:outline-none">
-          <input id="newHouseworkTitle" type="text" placeholder="Task name (e.g. Wash dishes)" class="col-span-3 bg-white border border-emerald-200 rounded-xl px-3 py-1.5 text-xs font-medium focus:outline-none">
+          <input id="newHouseworkEmoji" type="text" placeholder="🧹" class="col-span-1 bg-white border border-emerald-300 rounded-xl px-2 py-1.5 text-center text-base focus:outline-none">
+          <input id="newHouseworkTitle" type="text" placeholder="Task name (e.g. Wash dishes)" class="col-span-3 bg-white border border-emerald-300 rounded-xl px-3 py-1.5 text-xs font-medium focus:outline-none">
         </div>
-        <div class="flex gap-2 justify-end">
+        <div class="flex gap-2 justify-end pt-1">
           <button onclick="toggleAddTaskForm('housework')" class="px-3 bg-slate-200 text-slate-600 text-xs font-semibold py-1 rounded-xl">Cancel</button>
-          <button onclick="addNewTask('housework')" class="px-4 bg-emerald-500 text-white text-xs font-bold py-1 rounded-xl shadow-sm">Add</button>
+          <button onclick="addNewTask('housework')" class="px-4 bg-emerald-600 text-white text-xs font-bold py-1 rounded-xl shadow-sm">Save Task</button>
         </div>
       </div>
 
       <!-- Danh sách động của Housework -->
-      <div id="houseworkListContainer" class="space-y-2">
-        <!-- Render tự động từ Firestore -->
-      </div>
+      <div id="houseworkListContainer" class="space-y-2"></div>
     </div>
 
-    <!-- 6. DAILY HABITS (CÓ NÚT THÊM VIỆC TRỰC TIẾP) -->
+    <!-- 6. DAILY HABITS (VIỆC PHỤ: ĐƠN VỊ THƯỞNG THUẦN TÚY LÀ SAO ⭐) -->
     <div class="bg-white rounded-3xl p-5 border border-slate-200 shadow-sm space-y-3">
       <div class="flex items-center justify-between border-b pb-2">
-        <h3 class="font-bold text-slate-700 text-sm flex items-center gap-2">
-          <i class="fa-solid fa-star text-indigo-500"></i> Daily Habits
-        </h3>
-        <div class="flex items-center gap-2">
-          <span class="text-[10px] bg-slate-100 text-slate-500 px-2 py-0.5 rounded-full font-bold uppercase tracking-wider">+1 ⭐</span>
-          <button onclick="toggleAddTaskForm('habit')" class="text-[11px] bg-indigo-500 hover:bg-indigo-600 text-white px-2 py-0.5 rounded-lg font-bold transition flex items-center gap-1 shadow-sm">
-            <i class="fa-solid fa-plus text-[9px]"></i> Add Task
-          </button>
+        <div>
+          <h3 class="font-bold text-slate-700 text-sm flex items-center gap-1.5">
+            <i class="fa-solid fa-star text-indigo-500"></i> Daily Habits
+          </h3>
+          <span class="text-[10px] text-blue-600 font-bold">Reward in Stars (+1 ⭐)</span>
         </div>
+
+        <button onclick="toggleAddTaskForm('habit')" class="bg-indigo-600 active:scale-95 hover:bg-indigo-700 text-white text-xs font-bold px-3 py-1.5 rounded-xl transition flex items-center gap-1 shadow-sm">
+          <i class="fa-solid fa-plus text-[10px]"></i> Add Task
+        </button>
       </div>
 
-      <!-- Form thêm Habit (Ẩn/Hiện) -->
-      <div id="addHabitForm" class="hidden bg-indigo-50/60 border border-indigo-200 rounded-2xl p-3 space-y-2">
-        <div class="text-[11px] font-bold text-indigo-900 uppercase">Add New Daily Habit</div>
+      <!-- Khung nhập thêm việc mới của Habits -->
+      <div id="addHabitForm" class="hidden bg-indigo-50/70 border border-indigo-200 rounded-2xl p-3 space-y-2">
+        <div class="text-[11px] font-bold text-indigo-950 uppercase tracking-wide">New Daily Habit (+1 ⭐)</div>
         <div class="grid grid-cols-4 gap-2">
-          <input id="newHabitEmoji" type="text" placeholder="⭐️" class="col-span-1 bg-white border border-indigo-200 rounded-xl px-2 py-1.5 text-center text-sm font-bold focus:outline-none">
-          <input id="newHabitTitle" type="text" placeholder="Habit name (e.g. Read a book)" class="col-span-3 bg-white border border-indigo-200 rounded-xl px-3 py-1.5 text-xs font-medium focus:outline-none">
+          <input id="newHabitEmoji" type="text" placeholder="⭐️" class="col-span-1 bg-white border border-indigo-300 rounded-xl px-2 py-1.5 text-center text-base focus:outline-none">
+          <input id="newHabitTitle" type="text" placeholder="Habit name (e.g. Read books)" class="col-span-3 bg-white border border-indigo-300 rounded-xl px-3 py-1.5 text-xs font-medium focus:outline-none">
         </div>
-        <div class="flex gap-2 justify-end">
+        <div class="flex gap-2 justify-end pt-1">
           <button onclick="toggleAddTaskForm('habit')" class="px-3 bg-slate-200 text-slate-600 text-xs font-semibold py-1 rounded-xl">Cancel</button>
-          <button onclick="addNewTask('habit')" class="px-4 bg-indigo-500 text-white text-xs font-bold py-1 rounded-xl shadow-sm">Add</button>
+          <button onclick="addNewTask('habit')" class="px-4 bg-indigo-600 text-white text-xs font-bold py-1 rounded-xl shadow-sm">Save Task</button>
         </div>
       </div>
 
       <!-- Danh sách động của Daily Habits -->
-      <div id="habitsListContainer" class="space-y-2">
-        <!-- Render tự động từ Firestore -->
-      </div>
+      <div id="habitsListContainer" class="space-y-2"></div>
     </div>
 
     <!-- 7. KHU VỰC TIP TIỀN MẶT BẰNG $ -->
@@ -269,26 +267,26 @@
           <i class="fa-solid fa-gift text-amber-500"></i> Parent Cash Tip ($)
         </label>
         <span class="text-[10px] bg-amber-100 text-amber-900 font-bold px-2 py-0.5 rounded-full">
-          $1.00 = 1 ⭐
+          $1.00 = 5 ⭐
         </span>
       </div>
 
       <div class="grid grid-cols-3 gap-2">
         <button onclick="quickTip(1)" class="bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-200 text-xs font-bold py-1.5 rounded-xl transition">
-          +$1.00 (1⭐)
+          +$1.00
         </button>
         <button onclick="quickTip(2)" class="bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-200 text-xs font-bold py-1.5 rounded-xl transition">
-          +$2.00 (2⭐)
+          +$2.00
         </button>
         <button onclick="quickTip(5)" class="bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-200 text-xs font-bold py-1.5 rounded-xl transition">
-          +$5.00 (5⭐)
+          +$5.00
         </button>
       </div>
 
       <div class="flex gap-2 items-center pt-1">
         <div class="relative w-1/2">
           <span class="absolute left-3 top-2 text-xs font-bold text-slate-400">$</span>
-          <input id="customTipInput" type="number" min="1" step="1" placeholder="Custom $" class="w-full bg-slate-50 border border-slate-200 rounded-xl pl-6 pr-3 py-2 text-xs font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-amber-400">
+          <input id="customTipInput" type="number" min="0.2" step="0.2" placeholder="Custom $" class="w-full bg-slate-50 border border-slate-200 rounded-xl pl-6 pr-3 py-2 text-xs font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-amber-400">
         </div>
         <button onclick="sendCustomTip()" class="w-1/2 bg-amber-500 hover:bg-amber-600 active:scale-95 text-white text-xs font-bold py-2 rounded-xl transition flex items-center justify-center gap-1 shadow-sm">
           <i class="fa-solid fa-coins"></i> Send Tip ($)
@@ -332,7 +330,7 @@
     document.getElementById("yearNameLabel").innerText = currentYear;
     document.getElementById("currentDateLabel").innerText = `${monthNames[now.getMonth()]} ${now.getDate()}, ${currentYear}`;
 
-    // Danh sách nhiệm vụ mặc định ban đầu
+    // Housework: Thuần túy là $1.00 tiền mặt (không có sao)
     const defaultHousework = [
       { id: "hw_1", title: "Sweep the floor", emoji: "🧹" },
       { id: "hw_2", title: "Mop the floor", emoji: "🪣" },
@@ -340,6 +338,7 @@
       { id: "hw_4", title: "Massage parents' backs", emoji: "💆‍♂️" }
     ];
 
+    // Daily Habits: Thuần túy thưởng Sao (+1 ⭐)
     const defaultHabits = [
       { id: "hb_1", title: "Clean up toys after playing", emoji: "🧸" },
       { id: "hb_2", title: "Brush teeth before bedtime", emoji: "🪥" },
@@ -368,9 +367,8 @@
       }
     }
 
-    // Render danh sách việc ra màn hình
     function renderTasks() {
-      // 1. Render Housework
+      // 1. Render Housework: CHỈ CÓ $1.00 TIỀN MẶT
       const hwContainer = document.getElementById("houseworkListContainer");
       hwContainer.innerHTML = "";
       currentHouseworkList.forEach(task => {
@@ -381,11 +379,11 @@
             <span class="text-lg">${task.emoji || "🧹"}</span>
             <div>
               <p class="text-xs font-bold text-slate-800">${task.title}</p>
-              <p class="text-[10px] text-emerald-600 font-semibold">+$1.00 & +1 Star</p>
+              <p class="text-[10px] text-emerald-600 font-semibold">+$1.00 Cash</p>
             </div>
           </div>
           <div class="flex items-center gap-1.5">
-            <button onclick="rewardKid(1, '${task.title}')" class="bg-emerald-500 active:scale-95 hover:bg-emerald-600 text-white text-xs font-bold px-3 py-1.5 rounded-lg shadow-sm transition">
+            <button onclick="rewardHousework('${task.title}')" class="bg-emerald-500 active:scale-95 hover:bg-emerald-600 text-white text-xs font-bold px-3 py-1.5 rounded-lg shadow-sm transition">
               Approve ($1)
             </button>
             <button onclick="deleteTask('housework', '${task.id}')" class="text-slate-300 hover:text-rose-500 p-1.5 text-xs transition">
@@ -396,7 +394,7 @@
         hwContainer.appendChild(item);
       });
 
-      // 2. Render Daily Habits
+      // 2. Render Daily Habits: THUẦN TÚY THƯỞNG SAO (+1 ⭐)
       const hbContainer = document.getElementById("habitsListContainer");
       hbContainer.innerHTML = "";
       currentHabitsList.forEach(task => {
@@ -411,7 +409,7 @@
             </div>
           </div>
           <div class="flex items-center gap-1.5">
-            <button onclick="rewardKid(1, '${task.title}')" class="bg-blue-500 active:scale-95 hover:bg-blue-600 text-white text-xs font-bold px-3 py-1.5 rounded-lg shadow-sm transition">
+            <button onclick="rewardHabit('${task.title}')" class="bg-blue-500 active:scale-95 hover:bg-blue-600 text-white text-xs font-bold px-3 py-1.5 rounded-lg shadow-sm transition">
               Approve (+1⭐)
             </button>
             <button onclick="deleteTask('habit', '${task.id}')" class="text-slate-300 hover:text-rose-500 p-1.5 text-xs transition">
@@ -459,12 +457,14 @@
         document.getElementById("giveCoins").innerText = give;
         document.getElementById("currentSave").innerText = save;
         document.getElementById("currentGoalMax").innerText = goal;
-        document.getElementById("goalDollarsText").innerText = `$${goal.toFixed(2)}`;
+        document.getElementById("goalDollarsText").innerText = `$${(goal / 5).toFixed(2)}`;
+        document.getElementById("saveDollarsPreview").innerText = `$${(save / 5).toFixed(2)}`;
         
+        // Tỷ lệ quy đổi: 5 sao = 1$
         document.getElementById("monthEarnings").innerText = monthEarned;
-        document.getElementById("monthDollars").innerText = monthEarned.toFixed(2);
+        document.getElementById("monthDollars").innerText = (monthEarned / 5).toFixed(2);
         document.getElementById("yearEarnings").innerText = yearEarned;
-        document.getElementById("yearDollars").innerText = yearEarned.toFixed(2);
+        document.getElementById("yearDollars").innerText = (yearEarned / 5).toFixed(2);
 
         document.getElementById("goalTarget").innerText = `Goal: ${goal} ⭐`;
         document.getElementById("goalTitleDisplay").innerText = goalTitle;
@@ -497,13 +497,11 @@
       }
     });
 
-    // Bật/tắt form thêm task
     window.toggleAddTaskForm = function(type) {
       const form = document.getElementById(type === 'housework' ? "addHouseworkForm" : "addHabitForm");
       form.classList.toggle("hidden");
     };
 
-    // Thêm việc mới lên Firestore
     window.addNewTask = async function(type) {
       if (type === 'housework') {
         const title = document.getElementById("newHouseworkTitle").value.trim();
@@ -528,7 +526,6 @@
       }
     };
 
-    // Xoá việc
     window.deleteTask = async function(type, id) {
       if (confirm("Are you sure you want to remove this task?")) {
         if (type === 'housework') {
@@ -541,7 +538,6 @@
       }
     };
 
-    // Sửa Goal
     window.toggleGoalEdit = function() {
       const form = document.getElementById("goalEditForm");
       if (form.classList.contains("hidden")) {
@@ -573,76 +569,88 @@
       document.getElementById("goalEditForm").classList.add("hidden");
     };
 
-    // Duyệt thưởng
-    window.rewardKid = async function(stars, taskName) {
+    // 1. DUYỆT HOUSEWORK: CỘNG $1.00 TIỀN MẶT VÀO HŨ TIẾT KIỆM (TƯƠNG ĐƯƠNG 5 SAO QUY ĐỔI)
+    window.rewardHousework = async function(taskName) {
       await updateDoc(walletRef, {
-        save: increment(stars),
-        earnedThisMonth: increment(stars),
-        earnedThisYear: increment(stars)
+        save: increment(5),
+        earnedThisMonth: increment(5),
+        earnedThisYear: increment(5)
       });
     };
 
-    // Tip tiền mặt
+    // 2. DUYỆT DAILY HABITS: THUẦN TÚY CỘNG 1 SAO
+    window.rewardHabit = async function(taskName) {
+      await updateDoc(walletRef, {
+        save: increment(1),
+        earnedThisMonth: increment(1),
+        earnedThisYear: increment(1)
+      });
+    };
+
+    // TIP TIỀN MẶT BẰNG $(1$ = 5 SAO)
     window.quickTip = async function(dollars) {
-      if (confirm(`Tip $${dollars.toFixed(2)} to Chau? (+${dollars} Stars)`)) {
+      const stars = Math.round(dollars * 5);
+      if (confirm(`Tip $${dollars.toFixed(2)} to Chau?`)) {
         await updateDoc(walletRef, {
-          save: increment(dollars),
-          earnedThisMonth: increment(dollars),
-          earnedThisYear: increment(dollars)
+          save: increment(stars),
+          earnedThisMonth: increment(stars),
+          earnedThisYear: increment(stars)
         });
       }
     };
 
     window.sendCustomTip = async function() {
       const inputEl = document.getElementById("customTipInput");
-      const dollars = parseInt(inputEl.value);
+      const dollars = parseFloat(inputEl.value);
 
       if (isNaN(dollars) || dollars <= 0) {
         alert("Please enter a valid tip amount ($)!");
         return;
       }
 
-      if (confirm(`Tip $${dollars.toFixed(2)} to Chau? (+${dollars} Stars)`)) {
+      const stars = Math.round(dollars * 5);
+      if (confirm(`Tip $${dollars.toFixed(2)} to Chau?`)) {
         await updateDoc(walletRef, {
-          save: increment(dollars),
-          earnedThisMonth: increment(dollars),
-          earnedThisYear: increment(dollars)
+          save: increment(stars),
+          earnedThisMonth: increment(stars),
+          earnedThisYear: increment(stars)
         });
         inputEl.value = "";
       }
     };
 
-    // Trừ sửa sai
+    // TRỪ SỬA SAI KHI CỘNG NHẦM
     window.minusMistake = async function() {
       const inputEl = document.getElementById("mistakeAmountInput");
-      const amount = parseInt(inputEl.value);
+      const stars = parseInt(inputEl.value);
 
-      if (isNaN(amount) || amount <= 0) {
-        alert("Please enter a valid amount to correct!");
+      if (isNaN(stars) || stars <= 0) {
+        alert("Please enter a valid star count to correct!");
         return;
       }
 
       const currentSave = parseInt(document.getElementById("saveCoins").innerText);
-      if (currentSave < amount) {
-        alert(`Cannot deduct more than current Save jar balance (${currentSave})!`);
+      if (currentSave < stars) {
+        alert(`Cannot deduct more than current Save jar balance (${currentSave} ⭐)!`);
         return;
       }
 
-      if (confirm(`Deduct ${amount} ($ or ⭐) to fix accidental addition? (Will also correct Monthly & Yearly stats)`)) {
+      if (confirm(`Deduct ${stars} Star(s) to fix accidental addition? (Will also correct Monthly & Yearly stats)`)) {
         await updateDoc(walletRef, {
-          save: increment(-amount),
-          earnedThisMonth: increment(-amount),
-          earnedThisYear: increment(-amount)
+          save: increment(-stars),
+          earnedThisMonth: increment(-stars),
+          earnedThisYear: increment(-stars)
         });
         inputEl.value = "";
       }
     };
 
-    // Rút tiền đô
+    // RÚT TIỀN ĐÔ ($) TỪ SAVE (1$ = 5 SAO)
     window.updateDollarToStarPreview = function() {
       const dollars = parseFloat(document.getElementById("withdrawDollarInput").value);
       if (!isNaN(dollars) && dollars > 0) {
-        document.getElementById("starCostPreview").innerText = `${dollars} ⭐`;
+        const starCost = Math.round(dollars * 5);
+        document.getElementById("starCostPreview").innerText = `${starCost} ⭐`;
       } else {
         document.getElementById("starCostPreview").innerText = "0 ⭐";
       }
@@ -650,33 +658,36 @@
 
     window.withdrawDollars = async function() {
       const inputEl = document.getElementById("withdrawDollarInput");
-      const dollars = parseInt(inputEl.value);
+      const dollars = parseFloat(inputEl.value);
 
       if (isNaN(dollars) || dollars <= 0) {
         alert("Please enter a valid dollar amount ($)!");
         return;
       }
 
+      const starCost = Math.round(dollars * 5);
       const currentSave = parseInt(document.getElementById("saveCoins").innerText);
-      if (currentSave < dollars) {
-        alert(`Not enough stars in Save jar! You need ${dollars} ⭐ for $${dollars.toFixed(2)}, but only have ${currentSave} ⭐.`);
+
+      if (currentSave < starCost) {
+        alert(`Not enough balance in Save jar! You need $${dollars.toFixed(2)} (${starCost} ⭐), but only have ${currentSave} ⭐.`);
         return;
       }
 
-      if (confirm(`Withdraw $${dollars.toFixed(2)} cash? This will deduct ${dollars} Stars (⭐) from Save jar.`)) {
+      if (confirm(`Withdraw $${dollars.toFixed(2)} cash from Save jar?`)) {
         await updateDoc(walletRef, {
-          save: increment(-dollars)
+          save: increment(-starCost)
         });
         inputEl.value = "";
         document.getElementById("starCostPreview").innerText = "0 ⭐";
       }
     };
 
-    // Đổi sao ra tiền mặt
+    // ĐỔI SAO (⭐) RA TIỀN MẶT ($): 5 SAO = $1.00
     window.updateStarToDollarPreview = function() {
       const stars = parseFloat(document.getElementById("exchangeStarInput").value);
       if (!isNaN(stars) && stars > 0) {
-        document.getElementById("cashValuePreview").innerText = `$${stars.toFixed(2)}`;
+        const dollars = (stars / 5).toFixed(2);
+        document.getElementById("cashValuePreview").innerText = `$${dollars}`;
       } else {
         document.getElementById("cashValuePreview").innerText = "$0.00";
       }
@@ -693,11 +704,12 @@
 
       const currentSave = parseInt(document.getElementById("saveCoins").innerText);
       if (currentSave < stars) {
-        alert(`Not enough stars in Save jar! Current saved: ${currentSave} ⭐`);
+        alert(`Not enough stars in Save jar! Current balance: ${currentSave} ⭐`);
         return;
       }
 
-      if (confirm(`Exchange ${stars} Stars (⭐) for $${stars.toFixed(2)} cash? (Will deduct from Save jar)`)) {
+      const dollars = (stars / 5).toFixed(2);
+      if (confirm(`Exchange ${stars} Stars (⭐) for $${dollars} cash? (Will deduct from Save jar)`)) {
         await updateDoc(walletRef, {
           save: increment(-stars)
         });
@@ -706,7 +718,7 @@
       }
     };
 
-    // Reset All Data
+    // RESET TOÀN BỘ
     window.resetData = async function() {
       if (confirm("Are you sure you want to reset all jars and stats to 0?")) {
         await setDoc(walletRef, {
