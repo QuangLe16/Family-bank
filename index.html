@@ -19,7 +19,7 @@
     }
   </style>
 </head>
-<body class="bg-[#FFFDF5] min-h-screen text-slate-800 font-sans p-4 sm:p-6 pb-36">
+<body class="bg-[#FFFDF5] min-h-screen text-slate-800 font-sans p-4 sm:p-6 pb-28">
 
   <!-- Header -->
   <div class="max-w-md mx-auto text-center mb-5">
@@ -84,10 +84,10 @@
       </div>
     </div>
 
-    <!-- 3. RÚT TIỀN, ĐỔI SAO & SỬA SAI (NGAY DƯỚI TOTAL EARNINGS) -->
+    <!-- 3. KHU VỰC RÚT TIỀN, ĐỔI SAO & TRỪ SỬA SAI (NẰM DƯỚI TOTAL EARNINGS) -->
     <div class="bg-white rounded-3xl p-5 border border-slate-200 shadow-sm space-y-4">
       
-      <!-- Ô 1: RÚT TIỀN ĐÔ ($) -->
+      <!-- Ô 1: RÚT TIỀN ĐÔ ($) TỪ SAVE JAR -->
       <div class="space-y-2 pb-3 border-b border-slate-100">
         <label class="text-xs font-bold text-slate-800 flex items-center justify-between">
           <span class="flex items-center gap-1.5"><i class="fa-solid fa-dollar-sign text-blue-600"></i> Withdraw Cash ($) from Save</span>
@@ -107,7 +107,7 @@
         </button>
       </div>
 
-      <!-- Ô 2: ĐỔI SAO RA TIỀN MẶT ($) -->
+      <!-- Ô 2: ĐỔI TỪ SAO (⭐) RA TIỀN MẶT ($) -->
       <div class="space-y-2 pb-3 border-b border-slate-100">
         <div class="flex items-center justify-between">
           <label class="text-xs font-bold text-slate-800 flex items-center gap-1.5">
@@ -131,7 +131,7 @@
         </button>
       </div>
 
-      <!-- Ô 3: TRỪ SỬA SAI KHI CỘNG NHẦM -->
+      <!-- Ô 3: TRỪ SỬA SAI KHI LỠ CỘNG NHẦM -->
       <div class="space-y-2">
         <div class="flex items-center justify-between">
           <label class="text-xs font-bold text-rose-800 flex items-center gap-1.5">
@@ -196,70 +196,70 @@
       </div>
     </div>
 
-    <!-- 5. MAIN HOUSEWORK (CÓ NÚT + ADD TASK RÕ RÀNG) -->
+    <!-- 5. MAIN HOUSEWORK (CÓ NÚT THÊM VIỆC TRỰC TIẾP) -->
     <div class="bg-white rounded-3xl p-5 border border-slate-200 shadow-sm space-y-3">
       <div class="flex items-center justify-between border-b pb-2">
-        <div>
-          <h3 class="font-bold text-slate-800 text-sm flex items-center gap-1.5">
-            <i class="fa-solid fa-broom text-amber-500"></i> Housework
-          </h3>
-          <span class="text-[10px] text-emerald-600 font-bold">$1.00 & +1 Star</span>
+        <h3 class="font-bold text-slate-800 text-sm flex items-center gap-2">
+          <i class="fa-solid fa-broom text-amber-500"></i> Housework
+        </h3>
+        <div class="flex items-center gap-2">
+          <span class="text-[10px] bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full font-bold uppercase tracking-wider">$1 & 1⭐</span>
+          <button onclick="toggleAddTaskForm('housework')" class="text-[11px] bg-emerald-500 hover:bg-emerald-600 text-white px-2 py-0.5 rounded-lg font-bold transition flex items-center gap-1 shadow-sm">
+            <i class="fa-solid fa-plus text-[9px]"></i> Add Task
+          </button>
         </div>
-        
-        <!-- NÚT BẤM THÊM VIỆC HOUSEWORK -->
-        <button onclick="toggleAddTaskForm('housework')" class="bg-emerald-600 active:scale-95 hover:bg-emerald-700 text-white text-xs font-bold px-3 py-1.5 rounded-xl transition flex items-center gap-1 shadow-sm">
-          <i class="fa-solid fa-plus text-[10px]"></i> Add Task
-        </button>
       </div>
 
-      <!-- Khung nhập thêm việc mới của Housework -->
-      <div id="addHouseworkForm" class="hidden bg-emerald-50/70 border border-emerald-200 rounded-2xl p-3 space-y-2">
-        <div class="text-[11px] font-bold text-emerald-950 uppercase tracking-wide">New Housework Task</div>
+      <!-- Form thêm Housework (Ẩn/Hiện) -->
+      <div id="addHouseworkForm" class="hidden bg-emerald-50/60 border border-emerald-200 rounded-2xl p-3 space-y-2">
+        <div class="text-[11px] font-bold text-emerald-900 uppercase">Add New Housework Task</div>
         <div class="grid grid-cols-4 gap-2">
-          <input id="newHouseworkEmoji" type="text" placeholder="🧹" class="col-span-1 bg-white border border-emerald-300 rounded-xl px-2 py-1.5 text-center text-base focus:outline-none">
-          <input id="newHouseworkTitle" type="text" placeholder="Task name (e.g. Wash dishes)" class="col-span-3 bg-white border border-emerald-300 rounded-xl px-3 py-1.5 text-xs font-medium focus:outline-none">
+          <input id="newHouseworkEmoji" type="text" placeholder="🧹" class="col-span-1 bg-white border border-emerald-200 rounded-xl px-2 py-1.5 text-center text-sm font-bold focus:outline-none">
+          <input id="newHouseworkTitle" type="text" placeholder="Task name (e.g. Wash dishes)" class="col-span-3 bg-white border border-emerald-200 rounded-xl px-3 py-1.5 text-xs font-medium focus:outline-none">
         </div>
-        <div class="flex gap-2 justify-end pt-1">
+        <div class="flex gap-2 justify-end">
           <button onclick="toggleAddTaskForm('housework')" class="px-3 bg-slate-200 text-slate-600 text-xs font-semibold py-1 rounded-xl">Cancel</button>
-          <button onclick="addNewTask('housework')" class="px-4 bg-emerald-600 text-white text-xs font-bold py-1 rounded-xl shadow-sm">Save Task</button>
+          <button onclick="addNewTask('housework')" class="px-4 bg-emerald-500 text-white text-xs font-bold py-1 rounded-xl shadow-sm">Add</button>
         </div>
       </div>
 
       <!-- Danh sách động của Housework -->
-      <div id="houseworkListContainer" class="space-y-2"></div>
+      <div id="houseworkListContainer" class="space-y-2">
+        <!-- Render tự động từ Firestore -->
+      </div>
     </div>
 
-    <!-- 6. DAILY HABITS (CÓ NÚT + ADD TASK RÕ RÀNG) -->
+    <!-- 6. DAILY HABITS (CÓ NÚT THÊM VIỆC TRỰC TIẾP) -->
     <div class="bg-white rounded-3xl p-5 border border-slate-200 shadow-sm space-y-3">
       <div class="flex items-center justify-between border-b pb-2">
-        <div>
-          <h3 class="font-bold text-slate-700 text-sm flex items-center gap-1.5">
-            <i class="fa-solid fa-star text-indigo-500"></i> Daily Habits
-          </h3>
-          <span class="text-[10px] text-blue-600 font-bold">+1 Star</span>
+        <h3 class="font-bold text-slate-700 text-sm flex items-center gap-2">
+          <i class="fa-solid fa-star text-indigo-500"></i> Daily Habits
+        </h3>
+        <div class="flex items-center gap-2">
+          <span class="text-[10px] bg-slate-100 text-slate-500 px-2 py-0.5 rounded-full font-bold uppercase tracking-wider">+1 ⭐</span>
+          <button onclick="toggleAddTaskForm('habit')" class="text-[11px] bg-indigo-500 hover:bg-indigo-600 text-white px-2 py-0.5 rounded-lg font-bold transition flex items-center gap-1 shadow-sm">
+            <i class="fa-solid fa-plus text-[9px]"></i> Add Task
+          </button>
         </div>
-
-        <!-- NÚT BẤM THÊM VIỆC DAILY HABITS -->
-        <button onclick="toggleAddTaskForm('habit')" class="bg-indigo-600 active:scale-95 hover:bg-indigo-700 text-white text-xs font-bold px-3 py-1.5 rounded-xl transition flex items-center gap-1 shadow-sm">
-          <i class="fa-solid fa-plus text-[10px]"></i> Add Task
-        </button>
       </div>
 
-      <!-- Khung nhập thêm việc mới của Habits -->
-      <div id="addHabitForm" class="hidden bg-indigo-50/70 border border-indigo-200 rounded-2xl p-3 space-y-2">
-        <div class="text-[11px] font-bold text-indigo-950 uppercase tracking-wide">New Daily Habit</div>
+      <!-- Form thêm Habit (Ẩn/Hiện) -->
+      <div id="addHabitForm" class="hidden bg-indigo-50/60 border border-indigo-200 rounded-2xl p-3 space-y-2">
+        <div class="text-[11px] font-bold text-indigo-900 uppercase">Add New Daily Habit</div>
         <div class="grid grid-cols-4 gap-2">
-          <input id="newHabitEmoji" type="text" placeholder="⭐️" class="col-span-1 bg-white border border-indigo-300 rounded-xl px-2 py-1.5 text-center text-base focus:outline-none">
-          <input id="newHabitTitle" type="text" placeholder="Habit name (e.g. Read books)" class="col-span-3 bg-white border border-indigo-300 rounded-xl px-3 py-1.5 text-xs font-medium focus:outline-none">
+          <input id="newHabitEmoji" type="text" placeholder="⭐️" class="col-span-1 bg-white border border-indigo-200 rounded-xl px-2 py-1.5 text-center text-sm font-bold focus:outline-none">
+          <input id="newHabitTitle" type="text" placeholder="Habit name (e.g. Read a book)" class="col-span-3 bg-white border border-indigo-200 rounded-xl px-3 py-1.5 text-xs font-medium focus:outline-none">
         </div>
-        <div class="flex gap-2 justify-end pt-1">
+        <div class="flex gap-2 justify-end">
           <button onclick="toggleAddTaskForm('habit')" class="px-3 bg-slate-200 text-slate-600 text-xs font-semibold py-1 rounded-xl">Cancel</button>
-          <button onclick="addNewTask('habit')" class="px-4 bg-indigo-600 text-white text-xs font-bold py-1 rounded-xl shadow-sm">Save Task</button>
+          <button onclick="addNewTask('habit')" class="px-4 bg-indigo-500 text-white text-xs font-bold py-1 rounded-xl shadow-sm">Add</button>
         </div>
       </div>
 
       <!-- Danh sách động của Daily Habits -->
-      <div id="habitsListContainer" class="space-y-2"></div>
+      <div id="habitsListContainer" class="space-y-2">
+        <!-- Render tự động từ Firestore -->
+      </div>
     </div>
 
     <!-- 7. KHU VỰC TIP TIỀN MẶT BẰNG $ -->
@@ -332,6 +332,7 @@
     document.getElementById("yearNameLabel").innerText = currentYear;
     document.getElementById("currentDateLabel").innerText = `${monthNames[now.getMonth()]} ${now.getDate()}, ${currentYear}`;
 
+    // Danh sách nhiệm vụ mặc định ban đầu
     const defaultHousework = [
       { id: "hw_1", title: "Sweep the floor", emoji: "🧹" },
       { id: "hw_2", title: "Mop the floor", emoji: "🪣" },
@@ -367,7 +368,9 @@
       }
     }
 
+    // Render danh sách việc ra màn hình
     function renderTasks() {
+      // 1. Render Housework
       const hwContainer = document.getElementById("houseworkListContainer");
       hwContainer.innerHTML = "";
       currentHouseworkList.forEach(task => {
@@ -393,6 +396,7 @@
         hwContainer.appendChild(item);
       });
 
+      // 2. Render Daily Habits
       const hbContainer = document.getElementById("habitsListContainer");
       hbContainer.innerHTML = "";
       currentHabitsList.forEach(task => {
@@ -493,11 +497,13 @@
       }
     });
 
+    // Bật/tắt form thêm task
     window.toggleAddTaskForm = function(type) {
       const form = document.getElementById(type === 'housework' ? "addHouseworkForm" : "addHabitForm");
       form.classList.toggle("hidden");
     };
 
+    // Thêm việc mới lên Firestore
     window.addNewTask = async function(type) {
       if (type === 'housework') {
         const title = document.getElementById("newHouseworkTitle").value.trim();
@@ -522,6 +528,7 @@
       }
     };
 
+    // Xoá việc
     window.deleteTask = async function(type, id) {
       if (confirm("Are you sure you want to remove this task?")) {
         if (type === 'housework') {
@@ -534,6 +541,7 @@
       }
     };
 
+    // Sửa Goal
     window.toggleGoalEdit = function() {
       const form = document.getElementById("goalEditForm");
       if (form.classList.contains("hidden")) {
@@ -565,6 +573,7 @@
       document.getElementById("goalEditForm").classList.add("hidden");
     };
 
+    // Duyệt thưởng
     window.rewardKid = async function(stars, taskName) {
       await updateDoc(walletRef, {
         save: increment(stars),
@@ -573,6 +582,7 @@
       });
     };
 
+    // Tip tiền mặt
     window.quickTip = async function(dollars) {
       if (confirm(`Tip $${dollars.toFixed(2)} to Chau? (+${dollars} Stars)`)) {
         await updateDoc(walletRef, {
@@ -602,6 +612,7 @@
       }
     };
 
+    // Trừ sửa sai
     window.minusMistake = async function() {
       const inputEl = document.getElementById("mistakeAmountInput");
       const amount = parseInt(inputEl.value);
@@ -627,6 +638,7 @@
       }
     };
 
+    // Rút tiền đô
     window.updateDollarToStarPreview = function() {
       const dollars = parseFloat(document.getElementById("withdrawDollarInput").value);
       if (!isNaN(dollars) && dollars > 0) {
@@ -660,6 +672,7 @@
       }
     };
 
+    // Đổi sao ra tiền mặt
     window.updateStarToDollarPreview = function() {
       const stars = parseFloat(document.getElementById("exchangeStarInput").value);
       if (!isNaN(stars) && stars > 0) {
@@ -693,6 +706,7 @@
       }
     };
 
+    // Reset All Data
     window.resetData = async function() {
       if (confirm("Are you sure you want to reset all jars and stats to 0?")) {
         await setDoc(walletRef, {
